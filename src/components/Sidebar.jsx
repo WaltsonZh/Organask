@@ -22,7 +22,11 @@ export default function Sidebar() {
         <i className='bx bx-chevron-left toggle' onClick={toggleFold}></i>
       </div>
       <div className='Sidebar--menu'>
-        <NavLink to='calendar' className='Sidebar--label'>
+        <NavLink end to='.' className={({ isActive }) => (isActive ? 'current--page Sidebar--label' : 'Sidebar--label')}>
+          <i className='bx bxs-dashboard'></i>
+          <span>Dashboard</span>
+        </NavLink>
+        <NavLink to='calendar' className={({ isActive }) => (isActive ? 'current--page Sidebar--label' : 'Sidebar--label')}>
           <i className='bx bxs-calendar'></i>
           <span>Calendar</span>
         </NavLink>

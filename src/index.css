@@ -6,13 +6,14 @@
   margin: 0;
   padding: 0;
   transition: all 0.3s;
+  color: var(--text-color);
 }
 
 :root {
   --primary-color-light: #90e0ef;
-  --primary-color: #03045e;
+  --primary-color: #005cb3;
   --highlight-color: #1fc7e9;
-  --text-color: #005cb3;
+  --text-color: #03045e;
   --body-color: #caf0f8;
 }
 
@@ -22,9 +23,9 @@ body {
 
 body.Dark {
   --primary-color-light: #20304a;
-  --primary-color: #e0d9e0;
+  --primary-color: #8e90a7;
   --highlight-color: #505e79;
-  --text-color: #8e90a7;
+  --text-color: #e0d9e0;
   --body-color: #0e1544;
 }
 
@@ -59,15 +60,15 @@ body.Dark {
   font-size: 2em;
   font-weight: 800;
   letter-spacing: -1px;
-  padding: 24px;
+  padding: 16px 24px;
 }
 
 .toggle {
-  color: var(--primary-color);
+  color: var(--primary-color-light);
   position: absolute;
   top: 56px;
   right: -14px;
-  background: var(--highlight-color);
+  background: var(--primary-color);
   border-radius: 50%;
   cursor: pointer;
 }
@@ -87,7 +88,7 @@ body.Dark {
 .Sidebar--menu {
   margin: 2em 0;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto repeat(1, 1fr) auto ;
   gap: 1em;
   height: 100%;
 }
@@ -114,6 +115,10 @@ body.Dark {
 }
 
 .Sidebar--label:hover {
+  background: var(--highlight-color);
+}
+
+.current--page {
   background: var(--highlight-color);
 }
 
@@ -174,7 +179,7 @@ body.Dark .mode--icon .bx-moon {
   position: absolute;
   width: 22px;
   height: 22px;
-  background: var(--highlight-color);
+  background: var(--primary-color);
   top: 4px;
   left: 4px;
   border-radius: 11px;
