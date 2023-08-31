@@ -1,27 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 * {
   font-family: Poppins, sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition: all .3s ease;
+  transition: all 0.3s;
 }
 
 :root {
-  --primary-color-light: #bcfefe;
-  --primary-color: #001c44;
-  --highlight-color: #2d99ae;
-  --text-color: #0c5776;
-  --body-color: #f8dad0;
+  --primary-color-light: #90e0ef;
+  --primary-color: #03045e;
+  --highlight-color: #1fc7e9;
+  --text-color: #005cb3;
+  --body-color: #caf0f8;
 }
 
 body {
   background: var(--body-color);
 }
 
+body.Dark {
+  --primary-color-light: #20304a;
+  --primary-color: #e0d9e0;
+  --highlight-color: #505e79;
+  --text-color: #8e90a7;
+  --body-color: #0e1544;
+}
+
+#root {
+  display: flex;
+}
+
 .bx {
-  font-size: 32px;
+  font-size: 30px;
 }
 
 .Sidebar {
@@ -31,39 +43,144 @@ body {
   width: 350px;
   display: flex;
   flex-direction: column;
-  padding: 2em;
+  padding: 2em 1em;
   position: relative;
+  white-space: nowrap;
 }
 
-.Sidebar * {
+/* .Sidebar * {
   outline: auto;
-}
+} */
 
 .Sidebar--title {
   display: flex;
   align-items: center;
   gap: 10px;
-  white-space: nowrap;
+  font-size: 2em;
+  font-weight: 800;
+  letter-spacing: -1px;
+  padding: 24px;
 }
 
 .toggle {
-  color: var(--primary-color-light);
+  color: var(--primary-color);
   position: absolute;
-  top: 40px;
-  right: -16px;
+  top: 56px;
+  right: -14px;
   background: var(--highlight-color);
   border-radius: 50%;
   cursor: pointer;
 }
 
 .Sidebar.fold {
-  width: 100px;
+  width: 108px;
 }
 
-.Sidebar.fold h1 {
+.Sidebar.fold span {
   opacity: 0;
 }
 
 .Sidebar.fold .toggle {
   transform: rotate(180deg);
+}
+
+.Sidebar--menu {
+  margin: 2em 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 1em;
+  height: 100%;
+}
+
+.Sidebar--label {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  height: 60px;
+  border-radius: 10px;
+  padding: 1.4em;
+  cursor: pointer;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.Sidebar.fold .Sidebar--label {
+  width: 76px;
+}
+
+.Sidebar--label span {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.Sidebar--label:hover {
+  background: var(--highlight-color);
+}
+
+.Sidebar--mode {
+  position: relative;
+  display: flex;
+}
+
+.Sidebar--mode span {
+  flex-grow: 1;
+}
+
+.Sidebar--mode .mode--icon {
+  position: relative;
+  width: 32px;
+}
+
+.Sidebar--mode .mode--icon .bx {
+  position: absolute;
+  top: -16px;
+}
+
+.Sidebar--mode .mode--icon .bx-sun {
+  opacity: 0;
+}
+
+body.Dark .mode--icon .bx-sun {
+  opacity: 1;
+}
+
+body.Dark .mode--icon .bx-moon {
+  opacity: 0;
+}
+
+.Sidebar--mode .mode--switch {
+  height: 100%;
+  min-width: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s;
+}
+
+.Sidebar.fold .mode--switch {
+  transform: translateX(-177px);
+}
+
+.Sidebar--mode .switch {
+  height: 30px;
+  width: 60px;
+  background: var(--body-color);
+  border-radius: 15px;
+  position: absolute;
+}
+
+.Sidebar--mode .switch::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: var(--highlight-color);
+  top: 4px;
+  left: 4px;
+  border-radius: 11px;
+  transition: all .3s;
+}
+
+body.Dark .switch::before {
+  left: 33px;
 }
