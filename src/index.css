@@ -31,21 +31,26 @@ body {
   width: 350px;
   display: flex;
   flex-direction: column;
-  overflow: auto;
   padding: 2em;
+  position: relative;
+}
+
+.Sidebar * {
+  outline: auto;
 }
 
 .Sidebar--title {
   display: flex;
   align-items: center;
   gap: 10px;
-  position: absolute;
+  white-space: nowrap;
 }
 
 .toggle {
   color: var(--primary-color-light);
   position: absolute;
-  right: -58px;
+  top: 40px;
+  right: -16px;
   background: var(--highlight-color);
   border-radius: 50%;
   cursor: pointer;
@@ -60,6 +65,5 @@ body {
 }
 
 .Sidebar.fold .toggle {
-  right: 192px;
   transform: rotate(180deg);
 }

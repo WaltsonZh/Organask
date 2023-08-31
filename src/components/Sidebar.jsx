@@ -13,7 +13,11 @@ export default function Sidebar() {
       <div className='Sidebar--title'>
         <i className='bx bx-task'></i>
         <h1>Task Manager</h1>
-        <i className='bx bx-chevron-left toggle' onClick={toggle}></i>
+      </div>
+      <i className='bx bx-chevron-left toggle' onClick={toggle}></i>
+      <div className='Sidebar--mode'>
+        {/* <i class='bx bx-moon'></i>
+        <i class='bx bx-sun'></i> */}
       </div>
     </div>
   )
