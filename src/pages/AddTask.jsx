@@ -1,20 +1,23 @@
-import { addDoc } from 'firebase/firestore'
 import React from 'react'
-import { taskCollection } from '../firebase'
+import { addTask } from '../firebase'
 
 export default function AddTask() {
   const submit = (e) => {
     e.preventDefault()
-    addDoc(taskCollection, {
-      category: e.target.category.value,
-      task: e.target.task.value,
-      date: e.target.date.value,
-    })
+    addTask(e.target.category.value, e.target.timestamp.value, e.target.task.value, e.target.description.value)
+    e.target.reset()
   }
 
   return (
     <div className='AddTask Page'>
       <h1>AddTask</h1>
+      <form onSubmit={submit}>
+        <input type='text' name='category' placeholder='Category' />
+        <input type='date' name='timestamp' />
+        <input type='text' name='task' placeholder='Task' />
+        <input type='text' name='description' placeholder='Description' />
+        <button>submit</button>
+      </form>
     </div>
   )
 }
