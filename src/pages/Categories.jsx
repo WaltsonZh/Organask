@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Categories() {
   return (
-    <div>
+    <div className='Categories Page'>
       <h1>Categories</h1>
     </div>
   )
