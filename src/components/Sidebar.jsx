@@ -34,6 +34,10 @@ export default function Sidebar() {
           <i className='bx bx-spreadsheet'></i>
           <span>Categories</span>
         </NavLink>
+        <NavLink to='pomodoro' className={({ isActive }) => (isActive ? 'current--page Sidebar--label' : 'Sidebar--label')}>
+          <i className='bx bx-stopwatch'></i>
+          <span>Pomodoro</span>
+        </NavLink>
         <div className='Sidebar--mode Sidebar--label' onClick={toggleMode}>
           <div className='mode--icon'>
             <i className='bx bx-moon'></i>

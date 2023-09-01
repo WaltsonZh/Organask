@@ -4,6 +4,7 @@ import Layout from './layouts/Layout'
 import Calendar from './pages/Calendar'
 import Dashboard from './pages/Dashboard'
 import Categories from './pages/Categories'
+import Pomodoro from './pages/Pomodoro'
 import AddTask from './pages/AddTask'
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
         <Route index element={<Dashboard />} />
         <Route path='calendar' element={<Calendar />} />
         <Route path='categories' element={<Categories />} />
+        <Route path='pomodoro' element={<Pomodoro />} />
         <Route path='addtask' element={<AddTask />} />
       </Route>
     )

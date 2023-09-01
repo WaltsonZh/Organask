@@ -38,6 +38,10 @@ body.Dark {
   font-size: 30px;
 }
 
+.remove {
+  display: none;
+}
+
 .Sidebar {
   background: var(--primary-color-light);
   color: var(--text-color);
@@ -195,15 +199,15 @@ body.Dark .switch::before {
   bottom: 2em;
   width: 4em;
   height: 4em;
-  background: var(--highlight-color);
-  color: var(--primary-color);
+  background: var(--primary-color-light);
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   border-radius: 50%;
+  box-shadow: 0 0px 4px 3px rgba(0, 0, 0, 0.2);
 }
 
-.remove {
-  opacity: 0;
+.AddTask--btn:hover {
+  background: var(--highlight-color);
 }

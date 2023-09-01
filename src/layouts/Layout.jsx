@@ -7,7 +7,7 @@ export default function Layout() {
     <>
       <Sidebar />
       <Outlet />
-      <NavLink to='addtask' className='AddTask--btn'>
+      <NavLink to='addtask' className={({isActive}) => (isActive ? 'remove' : 'AddTask--btn')}>
         <i className='bx bx-plus'></i>
       </NavLink>
     </>
