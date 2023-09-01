@@ -31,6 +31,7 @@ body.Dark {
 
 #root {
   display: flex;
+  position: relative;
 }
 
 .bx {
@@ -88,8 +89,8 @@ body.Dark {
 .Sidebar--menu {
   margin: 2em 0;
   display: grid;
-  grid-template-rows: auto repeat(1, 1fr) auto ;
   gap: 1em;
+  grid-template-rows: repeat(auto-fill, minmax(60px, 1fr));
   height: 100%;
 }
 
@@ -103,10 +104,7 @@ body.Dark {
   cursor: pointer;
   color: var(--text-color);
   text-decoration: none;
-}
-
-.Sidebar.fold .Sidebar--label {
-  width: 76px;
+  overflow: hidden;
 }
 
 .Sidebar--label span {
@@ -123,6 +121,7 @@ body.Dark {
 }
 
 .Sidebar--mode {
+  grid-row: -1;
   position: relative;
   display: flex;
 }
@@ -188,4 +187,23 @@ body.Dark .mode--icon .bx-moon {
 
 body.Dark .switch::before {
   left: 33px;
+}
+
+.AddTask--btn {
+  position: absolute;
+  right: 2em;
+  bottom: 2em;
+  width: 4em;
+  height: 4em;
+  background: var(--highlight-color);
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+.remove {
+  opacity: 0;
 }

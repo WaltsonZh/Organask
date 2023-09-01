@@ -27,8 +27,12 @@ export default function Sidebar() {
           <span>Dashboard</span>
         </NavLink>
         <NavLink to='calendar' className={({ isActive }) => (isActive ? 'current--page Sidebar--label' : 'Sidebar--label')}>
-          <i className='bx bxs-calendar'></i>
+          <i className='bx bx-calendar'></i>
           <span>Calendar</span>
+        </NavLink>
+        <NavLink to='categories' className={({ isActive }) => (isActive ? 'current--page Sidebar--label' : 'Sidebar--label')}>
+          <i className='bx bx-spreadsheet'></i>
+          <span>Categories</span>
         </NavLink>
         <div className='Sidebar--mode Sidebar--label' onClick={toggleMode}>
           <div className='mode--icon'>
