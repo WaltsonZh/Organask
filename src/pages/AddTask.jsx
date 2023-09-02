@@ -22,9 +22,9 @@ export default function AddTask() {
     <div className='AddTask Page'>
       <h1>AddTask</h1>
       <form onSubmit={submit}>
-        <input type='text' onChange={handleChange} name='category' placeholder='Category' />
-        <input type='date' onChange={handleChange} name='timestamp' />
-        <input type='text' onChange={handleChange} name='task' placeholder='Task' />
+        <input type='text' onChange={handleChange} name='category' placeholder='Category' required />
+        <input type='date' onChange={handleChange} name='timestamp' required />
+        <input type='text' onChange={handleChange} name='task' placeholder='Task' required />
         <input type='text' onChange={handleChange} name='description' placeholder='Description' />
         <button>submit</button>
       </form>

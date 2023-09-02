@@ -45,6 +45,7 @@ body.Dark {
 
 .Page {
   padding: 3em;
+  display: grid;
 }
 
 .Sidebar {
