@@ -217,10 +217,6 @@ body.Dark .switch::before {
   background: var(--highlight-color);
 }
 
-.Categories {
-  display: grid;
-}
-
 .Categories--task {
   display: grid;
 }
