@@ -179,6 +179,7 @@ body.Dark .mode--icon .bx-moon {
   background: var(--body-color);
   border-radius: 15px;
   position: absolute;
+  left: 0;
 }
 
 .Sidebar--mode .switch::before {
