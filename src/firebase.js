@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { addDoc, collection, deleteDoc, getFirestore, onSnapshot } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getFirestore } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,10 +19,10 @@ const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 export const taskCollection = collection(db, 'tasks')
 
-export const addTask = (category, timestamp, task, description) => {
-  addDoc(taskCollection, {category, timestamp, task, description})
+export const addTask = async (taskData) => {
+  await addDoc(taskCollection, taskData)
 }
 
-export const removeTask = (taskId) => {
-  deleteDoc(taskId)
+export const removeTask = async (taskId) => {
+  await deleteDoc(doc(db, 'tasks', taskId))
 }

@@ -215,3 +215,11 @@ body.Dark .switch::before {
 .AddTask--btn:hover {
   background: var(--highlight-color);
 }
+
+.Categories {
+  display: grid;
+}
+
+.Categories--task {
+  display: grid;
+}
