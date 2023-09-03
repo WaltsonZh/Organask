@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Form, useActionData } from 'react-router-dom'
 import { Timestamp } from 'firebase/firestore'
+import { addTask } from '../firebase'
 
 export const action = async ({ request }) => {
   const formData = await request.formData()
@@ -26,13 +27,14 @@ export const action = async ({ request }) => {
     endTimestamp,
     fullday: data.fullday ? true : false,
   }
+  addTask(data)
 
-  return data
+  return null
 }
 
 export default function AddTask() {
   const task = useActionData()
-  const [fullDay, setFullDay] = useState(true)
+  const [fullDay, setFullDay] = useState(false)
   const checkbox = useRef()
 
   return (
@@ -54,7 +56,6 @@ export default function AddTask() {
         <input type='text' name='description' placeholder='Description' />
         <button>submit</button>
       </Form>
-      <p>{JSON.stringify(task)}</p>
     </div>
   )
 }

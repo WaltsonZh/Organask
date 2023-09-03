@@ -7,7 +7,7 @@ export default function Categories() {
 
   useEffect(() => {
     const unsubscribe = () => {
-      const q = query(taskCollection, orderBy('timestamp'))
+      const q = query(taskCollection, orderBy('startTimestamp'))
       onSnapshot(q, (snapshot) => {
         const taskArr = snapshot.docs.map((doc) => ({
           ...doc.data(),
