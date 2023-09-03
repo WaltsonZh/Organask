@@ -1,33 +1,60 @@
-import React, { useState } from 'react'
-import { addTask } from '../firebase'
+import React, { useRef, useState } from 'react'
+import { Form, useActionData } from 'react-router-dom'
+import { Timestamp } from 'firebase/firestore'
+
+export const action = async ({ request }) => {
+  const formData = await request.formData()
+  let data = {}
+  for (const pair of formData.entries()) {
+    data[pair[0]] = pair[1]
+  }
+
+  const jsStartTime = new Date(`${data.startdate} ${data.starttime}`)
+  const startTimestamp = Timestamp.fromDate(jsStartTime)
+
+  const jsEndTime = new Date(`${data.fullday ? data.enddate : `${data.startdate} ${data.endtime}`}`)
+
+  const endTimestamp = Timestamp.fromDate(jsEndTime)
+  delete data.startdate
+  delete data.starttime
+  delete data.endtime
+  delete data.enddate
+
+  data = {
+    ...data,
+    startTimestamp,
+    endTimestamp,
+    fullday: data.fullday ? true : false,
+  }
+
+  return data
+}
 
 export default function AddTask() {
-  const [taskData, setTaskData] = useState({})
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setTaskData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }))
-  }
-
-  const submit = (e) => {
-    e.preventDefault()
-    addTask(taskData)
-    e.target.reset()
-  }
+  const task = useActionData()
+  const [fullDay, setFullDay] = useState(true)
+  const checkbox = useRef()
 
   return (
     <div className='AddTask Page'>
       <h1>AddTask</h1>
-      <form onSubmit={submit}>
-        <input type='text' onChange={handleChange} name='category' placeholder='Category' required />
-        <input type='date' onChange={handleChange} name='timestamp' required />
-        <input type='text' onChange={handleChange} name='task' placeholder='Task' required />
-        <input type='text' onChange={handleChange} name='description' placeholder='Description' />
+      <Form method='post'>
+        <input type='text' name='category' placeholder='Category' required />
+        <input type='date' name='startdate' required />
+        {fullDay ? <input type='date' name='enddate' required /> : null}
+        <input ref={checkbox} type='checkbox' name='fullday' onChange={(e) => setFullDay(e.target.checked)} />
+        <label htmlFor='fullday'>fullday</label>
+        {!fullDay ? (
+          <>
+            <input type='time' name='starttime' required />
+            <input type='time' name='endtime' required />
+          </>
+        ) : null}
+        <input type='text' name='task' placeholder='Task' required />
+        <input type='text' name='description' placeholder='Description' />
         <button>submit</button>
-      </form>
+      </Form>
+      <p>{JSON.stringify(task)}</p>
     </div>
   )
 }
