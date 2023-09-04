@@ -1,23 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { removeTask, taskCollection } from '../firebase'
-import { onSnapshot, orderBy, query } from 'firebase/firestore'
+import React from 'react'
+import { removeTask } from '../firebase'
+import { useOutletContext } from 'react-router-dom'
 
 export default function Categories() {
-  const [tasks, setTasks] = useState([])
-
-  useEffect(() => {
-    const unsubscribe = () => {
-      const q = query(taskCollection, orderBy('startTimestamp'))
-      onSnapshot(q, (snapshot) => {
-        const taskArr = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-        setTasks(taskArr)
-      })
-    }
-    unsubscribe()
-  }, [])
+  const tasks = useOutletContext()
 
   return (
     <div className='Categories Page'>

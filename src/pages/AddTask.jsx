@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Form, useActionData } from 'react-router-dom'
+import { Form } from 'react-router-dom'
 import { Timestamp } from 'firebase/firestore'
 import { addTask } from '../firebase'
 
@@ -10,12 +10,11 @@ export const action = async ({ request }) => {
     data[pair[0]] = pair[1]
   }
 
-  const jsStartTime = new Date(`${data.startdate} ${data.starttime}`)
+  const jsStartTime = new Date(`${data.fullday ? data.startdate : `${data.startdate} ${data.starttime}`}`)
   const startTimestamp = Timestamp.fromDate(jsStartTime)
-
   const jsEndTime = new Date(`${data.fullday ? data.enddate : `${data.startdate} ${data.endtime}`}`)
-
   const endTimestamp = Timestamp.fromDate(jsEndTime)
+
   delete data.startdate
   delete data.starttime
   delete data.endtime
@@ -33,7 +32,6 @@ export const action = async ({ request }) => {
 }
 
 export default function AddTask() {
-  const task = useActionData()
   const [fullDay, setFullDay] = useState(false)
   const checkbox = useRef()
 
