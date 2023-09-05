@@ -5,7 +5,9 @@ import { query, orderBy, onSnapshot } from 'firebase/firestore'
 import { taskCollection } from '../firebase'
 
 export default function Layout() {
-  const [tasks, setTasks] = useState()
+  const [tasks, setTasks] = useState([])
+
+  console.log(tasks)
 
   useEffect(() => {
     const unsubscribe = () => {
