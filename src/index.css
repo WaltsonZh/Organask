@@ -32,7 +32,8 @@ body.Dark {
 
 #root {
   display: flex;
-  position: relative;
+  height: 100dvh;
+  width: 100dvw;
 }
 
 .bx {
@@ -45,8 +46,10 @@ body.Dark {
 
 .Page {
   padding: 3em;
+  padding-left: calc(3em);
   display: grid;
   width: 100%;
+  overflow: auto;
 }
 
 .Sidebar {
@@ -57,8 +60,9 @@ body.Dark {
   display: flex;
   flex-direction: column;
   padding: 2em 1em;
-  position: relative;
   white-space: nowrap;
+  position: sticky;
+  top: 0;
 }
 
 /* .Sidebar * {
@@ -200,7 +204,7 @@ body.Dark .switch::before {
 }
 
 .AddTask--btn {
-  position: absolute;
+  position: fixed;
   right: 2em;
   bottom: 2em;
   width: 4em;

@@ -17,6 +17,38 @@ export default function Categories() {
             </button>
           </div>
         ))}
+        {tasks.map((task) => (
+          <div key={task.id}>
+            <p>{JSON.stringify(task)}</p>
+            <button className='delete--btn' onClick={() => removeTask(task.id)}>
+              delete task
+            </button>
+          </div>
+        ))}
+        {tasks.map((task) => (
+          <div key={task.id}>
+            <p>{JSON.stringify(task)}</p>
+            <button className='delete--btn' onClick={() => removeTask(task.id)}>
+              delete task
+            </button>
+          </div>
+        ))}
+        {tasks.map((task) => (
+          <div key={task.id}>
+            <p>{JSON.stringify(task)}</p>
+            <button className='delete--btn' onClick={() => removeTask(task.id)}>
+              delete task
+            </button>
+          </div>
+        ))}
+        {tasks.map((task) => (
+          <div key={task.id}>
+            <p>{JSON.stringify(task)}</p>
+            <button className='delete--btn' onClick={() => removeTask(task.id)}>
+              delete task
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   )
