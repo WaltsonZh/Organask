@@ -22,3 +22,10 @@ export const getMonthCalendar = (today) => {
 
   return calendar
 }
+
+export const timeFormat = (time) => {
+  const min = Math.floor(time / 60) % 60
+  const sec = time % 60
+  const hour = Math.floor(time / 3600)
+  return `${hour > 0 ? hour + ':' : ''}${min < 10 ? 0 : ''}${min}:${sec < 10 ? 0 : ''}${sec}`
+}

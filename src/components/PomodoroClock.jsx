@@ -1,15 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import { timeFormat } from '../utils'
 
-export default function PomodoroClock() {
+export default function PomodoroClock({ workTime, shortBreak, longBreak, status, handleStatus }) {
   const [running, setRunning] = useState(false)
+  const timer = useRef()
+  const routine = useRef(0)
+  const [timeMap, setTimeMap] = useState({
+    pomodoro: workTime,
+    shortBreak: shortBreak,
+    longBreak: longBreak,
+  })
+
+  useEffect(() => {
+    if (timeMap[status] < 0) {
+      if(status === 'pomodoro' && routine.current < 4) {
+        routine.current += 1
+        handleStatus('shortBreak')
+      } else if (status === 'pomodoro') {
+        routine.current = 0
+        handleStatus('longBreak')
+      } else {
+        handleStatus('pomodoro')
+      }
+    }
+  }, [timeMap])
+
 
   const toggle = () => {
+    if (running) {
+      clearInterval(timer.current)
+    } else {
+      start()
+    }
     setRunning((prevRunning) => !prevRunning)
+  }
+
+  const start = () => {
+    timer.current = setInterval(() => {
+      setTimeMap((prevTimeMap) => ({
+        ...prevTimeMap,
+        [status]: prevTimeMap[status] - 1,
+      }))
+    }, 1000)
+  }
+
+  const statusChange = (e) => {
+    clearInterval(timer.current)
+    handleStatus(e.target.name)
+    setTimeMap({
+      pomodoro: workTime,
+      shortBreak: shortBreak,
+      longBreak: longBreak,
+    })
   }
 
   return (
     <div className='PomodoroClock'>
-      <h1>00:00</h1>
+      <h1>{timeFormat(timeMap[status])}</h1>
       <div className='run'>
         <button onClick={toggle}>{running ? 'Pause' : 'Start'}</button>
         {running && (
@@ -18,9 +65,15 @@ export default function PomodoroClock() {
           </button>
         )}
       </div>
-      <button>Pomodoro</button>
-      <button>Short Break</button>
-      <button>Long Break</button>
+      <button onClick={statusChange} className={status === 'pomodoro' ? 'current' : ''} name='pomodoro'>
+        Pomodoro
+      </button>
+      <button onClick={statusChange} className={status === 'shortBreak' ? 'current' : ''} name='shortBreak'>
+        Short Break
+      </button>
+      <button onClick={statusChange} className={status === 'longBreak' ? 'current' : ''} name='longBreak'>
+        Long Break
+      </button>
     </div>
   )
 }
