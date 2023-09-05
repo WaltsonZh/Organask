@@ -7,8 +7,6 @@ import { taskCollection } from '../firebase'
 export default function Layout() {
   const [tasks, setTasks] = useState([])
 
-  console.log(tasks)
-
   useEffect(() => {
     const unsubscribe = () => {
       const q = query(taskCollection, orderBy('startTimestamp'))

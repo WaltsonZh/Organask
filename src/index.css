@@ -46,7 +46,6 @@ body.Dark {
 
 .Page {
   padding: 3em;
-  padding-left: calc(3em);
   display: grid;
   width: 100%;
   overflow: auto;
@@ -196,7 +195,7 @@ body.Dark .mode--icon .bx-moon {
   top: 4px;
   left: 4px;
   border-radius: 11px;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 body.Dark .switch::before {
@@ -245,8 +244,75 @@ body.Dark .switch::before {
 .Calendar .monthly--day {
   border: var(--highlight-color) 1px solid;
   padding: 0.2em 0.5em;
+  min-width: 100px;
 }
 
 .Categories--task {
   display: grid;
+}
+
+.Pomodoro {
+  grid-template-rows: repeat(auto-fill, minmax(6em, 1fr));
+  place-items: center;
+}
+
+.Pomodoro > h1 {
+  place-self: start;
+}
+
+.PomodoroClock {
+  background: var(--highlight-color);
+  width: 700px;
+  grid-row: span 4;
+  padding: 1em;
+  border-radius: 1em;
+  display: grid;
+  gap: 1em;
+  place-content: center;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* .Pomodoro * {
+  outline: auto;
+} */
+
+.PomodoroClock .run,
+.PomodoroClock h1 {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+}
+
+.PomodoroClock h1 {
+  font-size: 6.4em;
+  text-align: center;
+}
+
+.PomodoroClock .run {
+  gap: 1em;
+}
+
+.PomodoroClock button {
+  width: 100%;
+  height: 3.2em;
+  font-size: 1.2em;
+  background: var(--primary-color-light);
+  border-radius: 12px;
+}
+
+.PomodoroClock button:hover {
+  background: var(--body-color);
+}
+
+.PomodoroClock button:active {
+  background: var(--primary-color-light);
+}
+
+.PomodoroClock .skip {
+  max-width: 60px;
+  padding-top: 6px;
+}
+
+.PomodoroClock button.current {
+  background: var(--body-color);
 }
