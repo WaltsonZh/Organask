@@ -21,21 +21,7 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
 
   useEffect(() => {
     if (timeMap[status] < 0) {
-      clearInterval(timer.current)
-      setTimeMap({
-        pomodoro: workTime,
-        shortBreak: shortBreak,
-        longBreak: longBreak,
-      })
-      if (status === 'pomodoro' && routine.current < 3) {
-        routine.current += 1
-        handleStatus('shortBreak')
-      } else if (status === 'pomodoro') {
-        routine.current = 0
-        handleStatus('longBreak')
-      } else {
-        handleStatus('pomodoro')
-      }
+      skip()
     }
   }, [timeMap])
 
@@ -73,13 +59,31 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
     })
   }
 
+  const skip = () => {
+    clearInterval(timer.current)
+    setTimeMap({
+      pomodoro: workTime,
+      shortBreak: shortBreak,
+      longBreak: longBreak,
+    })
+    if (status === 'pomodoro' && routine.current < 3) {
+      routine.current += 1
+      handleStatus('shortBreak')
+    } else if (status === 'pomodoro') {
+      routine.current = 0
+      handleStatus('longBreak')
+    } else {
+      handleStatus('pomodoro')
+    }
+  }
+
   return (
     <div className='PomodoroClock'>
       <h1>{timeFormat(timeMap[status])}</h1>
       <div className='run'>
         <button onClick={toggle}>{running ? 'Pause' : 'Start'}</button>
         {running && (
-          <button className='skip'>
+          <button className='skip' onClick={skip}>
             <i className='bx bx-skip-next'></i>
           </button>
         )}
