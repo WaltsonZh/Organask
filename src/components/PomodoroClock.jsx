@@ -5,11 +5,16 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
   const [running, setRunning] = useState(false)
   const timer = useRef()
   const routine = useRef(0)
-  const [timeMap, setTimeMap] = useState({
-    pomodoro: workTime,
-    shortBreak: shortBreak,
-    longBreak: longBreak,
-  })
+  const [timeMap, setTimeMap] = useState({})
+
+  useEffect(() => {
+    console.log('useEffect')
+    setTimeMap({
+      pomodoro: workTime,
+      shortBreak: shortBreak,
+      longBreak: longBreak,
+    })
+  }, [workTime, shortBreak, longBreak])
 
   useEffect(() => {
     if (timeMap[status] < 0) {

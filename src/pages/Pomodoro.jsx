@@ -17,11 +17,11 @@ export default function Pomodoro() {
     <div className='Pomodoro Page'>
       <h1>Pomodoro</h1>
       <form>
-        <input type='number' defaultValue={pomodoro.workTime} onChange={handleChange} name='workTime' inputMode='numeric' />
+        <input type='number' defaultValue={25} onChange={handleChange} name='workTime' inputMode='numeric' />
         <label>Pomodoro {pomodoro.workTime}</label>
-        <input type='number' defaultValue={pomodoro.shortBreak} onChange={handleChange} name='shortBreak' inputMode='numeric' />
+        <input type='number' defaultValue={5} onChange={handleChange} name='shortBreak' inputMode='numeric' />
         <label>Short Break {pomodoro.shortBreak}</label>
-        <input type='number' defaultValue={pomodoro.longBreak} onChange={handleChange} name='longBreak' inputMode='numeric' />
+        <input type='number' defaultValue={15} onChange={handleChange} name='longBreak' inputMode='numeric' />
         <label>Long Break {pomodoro.longBreak}</label>
       </form>
       <PomodoroClock workTime={pomodoro.workTime * 60} shortBreak={pomodoro.shortBreak * 60} longBreak={pomodoro.longBreak * 60} status={status} handleStatus={(newStatus) => setStatus(newStatus)} />
