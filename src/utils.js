@@ -28,3 +28,16 @@ export const timeFormat = (time) => {
   const hour = Math.floor(time / 3600)
   return `${hour > 0 ? hour + ':' : ''}${min < 10 ? 0 : ''}${min}:${sec < 10 ? 0 : ''}${sec}`
 }
+
+export const filterTasksByMonth = (tasks, year, month) => {
+  const startEpoch = Math.floor(new Date(year, month).getTime() / 1000)
+  const endEpoch = Math.floor(new Date(year + Math.floor(month / 12), (month + 1) % 12).getTime() / 1000)
+  const filteredArray = []
+  tasks.forEach((task) => {
+    if (task.startTimestamp.seconds > startEpoch || task.endTimestamp.seconds < endEpoch ) {
+      filteredArray.push(task)
+    }
+  })
+
+  return filteredArray
+}

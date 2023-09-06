@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { getMonthCalendar } from '../utils'
+import { filterTasksByMonth, getMonthCalendar } from '../utils'
+import { useOutletContext } from 'react-router-dom'
 
 export default function Calendar() {
+  const tasks = useOutletContext()
   const today = new Date()
   const [date, setDate] = useState({
     day: today.getDate(),
@@ -18,7 +20,8 @@ export default function Calendar() {
         {week.map((day) => {
           return (
             <div key={key++} className={`monthly--day ${date.day === day ? 'today' : ''}`}>
-              {day ? day : ''}
+              <p>{day ? day : ''}</p>
+              <div></div>
             </div>
           )
         })}
