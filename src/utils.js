@@ -2,9 +2,7 @@ export const getMonthCalendar = (date) => {
   const { month, year } = date
   const first = new Date(year, month)
   const firstWeekday = first.getDay()
-  const leapYear = year % 400 === 0 ? true : year % 100 === 0 ? false : year % 4 === 0 ? true : false
-
-  const daysOfMonth = [31, leapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+  const daysOfMonth = getDaysOfMonth(year)
 
   const calendar = []
   for (let i = 0; i < 6; i++) {
@@ -20,6 +18,11 @@ export const getMonthCalendar = (date) => {
   }
 
   return calendar
+}
+
+export const getDaysOfMonth = (year) => {
+  const leapYear = year % 400 === 0 ? true : year % 100 === 0 ? false : year % 4 === 0 ? true : false
+  return [31, leapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 }
 
 export const timeFormat = (time) => {

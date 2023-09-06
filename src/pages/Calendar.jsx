@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { filterTasksByMonth, getMonthCalendar } from '../utils'
+import { filterTasksByMonth, getDaysOfMonth, getMonthCalendar } from '../utils'
 import { useOutletContext } from 'react-router-dom'
 
 export default function Calendar() {
@@ -11,6 +11,27 @@ export default function Calendar() {
     year: today.getFullYear(),
   })
   const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+  const taskOfMonth = filterTasksByMonth(tasks, date.year, date.month)
+  const taskDays = taskOfMonth.map((task) => {
+    const daysArr = []
+    const jsDate = [task.startTimestamp.toDate(), task.endTimestamp.toDate()]
+    if (jsDate[0].getMonth() != date.month) {
+      daysArr.push(1)
+    } else {
+      daysArr.push(jsDate[0].getDate())
+    }
+
+    if (jsDate[1].getMonth() != date.month) {
+      daysArr.push(getDaysOfMonth(date.year)[date.month])
+    } else {
+      daysArr.push(jsDate[1].getDate())
+    }
+
+    return daysArr
+  })
+
+  console.log(taskDays)
 
   const [monthlyCalendar, setMonthlyCalendar] = useState([])
   const monthlyCalendarEls = monthlyCalendar.map((week) => {
