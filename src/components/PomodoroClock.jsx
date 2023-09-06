@@ -18,6 +18,11 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
   useEffect(() => {
     if (timeMap[status] < 0) {
       clearInterval(timer.current)
+      setTimeMap({
+        pomodoro: workTime,
+        shortBreak: shortBreak,
+        longBreak: longBreak,
+      })
       if (status === 'pomodoro' && routine.current < 3) {
         routine.current += 1
         handleStatus('shortBreak')
