@@ -27,7 +27,7 @@ body.Dark {
   --primary-color: #8e90a7;
   --highlight-color: #505e79;
   --text-color: #e0d9e0;
-  --body-color: #0e1544;
+  --body-color: #161b3a;
 }
 
 #root {
@@ -226,13 +226,33 @@ body.Dark .switch::before {
 } */
 
 .Calendar {
-  grid-template-rows: repeat(auto-fill, minmax(3em, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(3.6em, 1fr));
+}
+
+.Calendar .calendar--header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.Calendar .calendar--header .bx {
+  background: var(--primary-color-light);
+  border-radius: 50%;
+}
+
+.Calendar .calendar--header .bx:hover {
+  background: var(--highlight-color);
+}
+
+.Calendar .calendar--header .bx:active {
+  background: var(--primary-color-light);
 }
 
 .Calendar .calendar--grid {
   display: grid;
   width: 100%;
-  grid-row: 3 / -3;
+  grid-row: 3 / -2;
   border: var(--highlight-color) 1px solid;
 }
 

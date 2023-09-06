@@ -1,9 +1,8 @@
-export const getMonthCalendar = (today) => {
-  const year = today.getFullYear()
-  const month = today.getMonth()
+export const getMonthCalendar = (date) => {
+  const { month, year } = date
   const first = new Date(year, month)
   const firstWeekday = first.getDay()
-  const leapYear = year % 400 ? true : year % 100 ? false : year % 4 ? true : false
+  const leapYear = year % 400 === 0 ? true : year % 100 === 0 ? false : year % 4 === 0 ? true : false
 
   const daysOfMonth = [31, leapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
