@@ -33,11 +33,11 @@ export const timeFormat = (time) => {
 }
 
 export const filterTasksByMonth = (tasks, year, month) => {
-  const startEpoch = Math.floor(new Date(year, month).getTime() / 1000)
-  const endEpoch = Math.floor(new Date(year + Math.floor(month / 12), (month + 1) % 12).getTime() / 1000)
   const filteredArray = []
+  const range = [new Date(year, month), new Date(year + Math.floor((month + 1) / 12), (month + 1) % 12)]
   tasks.forEach((task) => {
-    if (task.startTimestamp.seconds > startEpoch || task.endTimestamp.seconds < endEpoch ) {
+    const date = [task.startTimestamp.toDate(), task.endTimestamp.toDate()]
+    if ((date[0] < range[1] && date[0] > range[0]) || (date[1] > range[0] && date[1] < range[1]) || (date[1] > range[1] && date[0] < range[0])) {
       filteredArray.push(task)
     }
   })
