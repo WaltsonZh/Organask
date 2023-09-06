@@ -8,6 +8,10 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
   const [timeMap, setTimeMap] = useState({})
 
   useEffect(() => {
+    return () => clearInterval(timer.current)
+  }, [])
+
+  useEffect(() => {
     setTimeMap({
       pomodoro: workTime,
       shortBreak: shortBreak,
