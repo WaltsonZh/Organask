@@ -231,29 +231,42 @@ body.Dark .switch::before {
 
 .Calendar .calendar--header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 1em;
 }
 
-.Calendar .calendar--header .bx {
-  background: var(--primary-color-light);
-  border-radius: 50%;
+.Calendar .navigation {
+  display: flex;
+  gap: 1em;
 }
 
-.Calendar .calendar--header .bx:hover {
+.Calendar .bx {
+  background: var(--primary-color-light);
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.Calendar .bx:hover {
   background: var(--highlight-color);
 }
 
-.Calendar .calendar--header .bx:active {
+.Calendar .bx:active {
   background: var(--primary-color-light);
+}
+
+.Calendar .return {
+  width: 5em;
+  border-radius: 5px;
 }
 
 .Calendar .calendar--grid {
   display: grid;
   width: 100%;
   grid-row: 3 / -2;
-  border: var(--highlight-color) 1px solid;
+  border: var(--primary-color-light) 1px solid;
 }
 
 .Calendar .monthly--week {
@@ -262,9 +275,13 @@ body.Dark .switch::before {
 }
 
 .Calendar .monthly--day {
-  border: var(--highlight-color) 1px solid;
+  border: var(--primary-color-light) 1px solid;
   padding: 0.2em 0.5em;
   min-width: 100px;
+}
+
+.Calendar .monthly--day.today {
+  background: var(--highlight-color);
 }
 
 .Categories--task {
