@@ -8,7 +8,6 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
   const [timeMap, setTimeMap] = useState({})
 
   useEffect(() => {
-    console.log('useEffect')
     setTimeMap({
       pomodoro: workTime,
       shortBreak: shortBreak,
@@ -18,7 +17,8 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
 
   useEffect(() => {
     if (timeMap[status] < 0) {
-      if(status === 'pomodoro' && routine.current < 4) {
+      clearInterval(timer.current)
+      if (status === 'pomodoro' && routine.current < 3) {
         routine.current += 1
         handleStatus('shortBreak')
       } else if (status === 'pomodoro') {
@@ -30,6 +30,9 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
     }
   }, [timeMap])
 
+  useEffect(() => {
+    if (running) start()
+  }, [status])
 
   const toggle = () => {
     if (running) {
@@ -51,6 +54,8 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
 
   const statusChange = (e) => {
     clearInterval(timer.current)
+    setRunning(false)
+    routine.current = 0
     handleStatus(e.target.name)
     setTimeMap({
       pomodoro: workTime,
