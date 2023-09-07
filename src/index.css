@@ -326,6 +326,19 @@ body.Dark .switch::before {
   transform: translateX(-50%);
 }
 
+.Calendar .detail.align-right {
+  left: 7.5em;
+}
+
+.Calendar .detail.align-left {
+  left: unset;
+  right: -8em;
+}
+
+.Calendar .detail.align-top {
+  top: -90px;
+}
+
 .Calendar .detail::after {
   position: absolute;
   content: '';
@@ -334,6 +347,20 @@ body.Dark .switch::before {
   top: -20px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.Calendar .detail.align-right::after {
+  left: 18%
+}
+
+.Calendar .detail.align-left::after {
+  left: 82%
+}
+
+.Calendar .detail.align-top::after {
+  border-bottom: none;
+  border-top-color: white;
+  top: 66px;
 }
 
 .Categories--task {

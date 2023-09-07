@@ -45,10 +45,12 @@ export default function Calendar() {
               {taskDays.map((task) => {
                 if (day === task[0] && task[0] <= task[1]) {
                   task[0] += 1
+                  const alignInline = week.indexOf(day) === 0 ? 'align-right' : week.indexOf(day) === 6 ? 'align-left' : ''
+                  const alignTop = monthlyCalendar[monthlyCalendar.length - 1] === week ? 'align-top' : ''
                   return (
-                    <div className='task'>
+                    <div key={task[2].id} className='task'>
                       <p>{task[2].task}</p>
-                      <div className='detail'>
+                      <div className={`detail ${alignInline} ${alignTop}`}>
                         <p>{task[2].category}</p>
                         <p>{task[2].description}</p>
                       </div>
