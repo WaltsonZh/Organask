@@ -46,7 +46,13 @@ export default function Calendar() {
                 if (day === task[0] && task[0] <= task[1]) {
                   task[0] += 1
                   return (
-                    <p className='task'>{task[2].task}</p>
+                    <div className='task'>
+                      <p>{task[2].task}</p>
+                      <div className='detail'>
+                        <p>{task[2].category}</p>
+                        <p>{task[2].description}</p>
+                      </div>
+                    </div>
                   )
                 }
               })}
