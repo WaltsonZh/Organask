@@ -16,22 +16,22 @@ export default function Calendar() {
   const taskDays = taskOfMonth.map((task) => {
     const daysArr = []
     const jsDate = [task.startTimestamp.toDate(), task.endTimestamp.toDate()]
-    if (jsDate[0].getMonth() != date.month) {
+    if (jsDate[0].getMonth() !== date.month) {
       daysArr.push(1)
     } else {
       daysArr.push(jsDate[0].getDate())
     }
 
-    if (jsDate[1].getMonth() != date.month) {
+    if (jsDate[1].getMonth() !== date.month) {
       daysArr.push(getDaysOfMonth(date.year)[date.month])
     } else {
       daysArr.push(jsDate[1].getDate())
     }
 
+    daysArr.push(task)
+
     return daysArr
   })
-
-  console.log(taskDays)
 
   const [monthlyCalendar, setMonthlyCalendar] = useState([])
   const monthlyCalendarEls = monthlyCalendar.map((week) => {
@@ -42,7 +42,14 @@ export default function Calendar() {
           return (
             <div key={key++} className={`monthly--day ${date.day === day ? 'today' : ''}`}>
               <p>{day ? day : ''}</p>
-              <div></div>
+              {taskDays.map((task) => {
+                if (day === task[0] && task[0] <= task[1]) {
+                  task[0] += 1
+                  return (
+                    <p className='task'>{task[2].task}</p>
+                  )
+                }
+              })}
             </div>
           )
         })}

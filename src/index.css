@@ -49,6 +49,7 @@ body.Dark {
   display: grid;
   width: 100%;
   overflow: auto;
+  scrollbar-gutter: stable;
 }
 
 .Sidebar {
@@ -264,6 +265,7 @@ body.Dark .switch::before {
 
 .Calendar .calendar--grid {
   display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
   width: 100%;
   grid-row: 3 / -2;
   border: var(--primary-color-light) 1px solid;
@@ -276,12 +278,29 @@ body.Dark .switch::before {
 
 .Calendar .monthly--day {
   border: var(--primary-color-light) 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
   padding: 0.2em 0.5em;
   min-width: 100px;
 }
 
 .Calendar .monthly--day.today {
   background: var(--highlight-color);
+}
+
+.Calendar .task {
+  background: var(--primary-color-light);
+  border-radius: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9em;
+  cursor: pointer;
+  padding: 0 0.4em;
+}
+
+.Calendar .task:hover {
+  transform: scale(1.5);
 }
 
 .Categories--task {
