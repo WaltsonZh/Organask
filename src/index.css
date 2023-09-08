@@ -16,6 +16,7 @@
   --highlight-color: #1fc7e9;
   --text-color: #03045e;
   --body-color: #caf0f8;
+  --white-background: #ffffff;
 }
 
 body {
@@ -28,6 +29,7 @@ body.Dark {
   --highlight-color: #505e79;
   --text-color: #e0d9e0;
   --body-color: #161b3a;
+  --white-background: #212535;
 }
 
 #root {
@@ -317,13 +319,14 @@ body.Dark .switch::before {
   top: 40px;
   left: 50%;
   width: 250px;
-  background: var(--primary-color-light);
+  background: var(--white-background);
   border-radius: 5px;
   padding: 0.5em;
   z-index: 999;
   visibility: hidden;
   opacity: 0;
   transform: translateX(-50%);
+  pointer-events: none;
 }
 
 .Calendar .detail.align-right {
@@ -343,7 +346,7 @@ body.Dark .switch::before {
   position: absolute;
   content: '';
   border: 10px solid transparent;
-  border-bottom-color: var(--primary-color-light);
+  border-bottom-color: var(--white-background);
   top: -20px;
   left: 50%;
   transform: translateX(-50%);
@@ -359,7 +362,7 @@ body.Dark .switch::before {
 
 .Calendar .detail.align-top::after {
   border-bottom: none;
-  border-top-color: var(--primary-color-light);
+  border-top-color: var(--white-background);
   top: 66px;
 }
 
