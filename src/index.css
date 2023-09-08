@@ -370,25 +370,65 @@ body.Dark .switch::before {
 .Categories--task {
   display: grid;
   gap: 0.5em;
+  height: fit-content;
 }
 
 .Categories--task .folder {
   background: var(--primary-color-light);
-  padding: 1.2em;
+  cursor: pointer;
 }
 
 .Categories--task .folder h4 {
   font-size: 1.5em;
   font-weight: 600;
+  padding: 1.2em;
   pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(1em, 1fr));
+  gap: 1em;
+  white-space: nowrap;
+  align-items: center;
+}
+
+.Categories--task .bx-chevron-up {
+  grid-column: -2;
 }
 
 .Categories--task .folder:hover {
   background: var(--highlight-color);
 }
 
-.Categories--task .folder.hide * {
+.Categories--task .folder.hide .tasks {
   display: none;
+}
+
+.Categories--task .folder.hide .bx-chevron-up {
+  rotate: 180deg;
+}
+
+.Categories--task .task {
+  background: var(--primary-color-light);
+  padding: 1em 1.5em;
+  padding-left: 5em;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 2em;
+}
+
+.Categories--task .task h5 {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.Categories--task .task:hover {
+  background: var(--highlight-color);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.Categories--task .bx-trash {
+  text-align: end;
+  pointer-events: visible;
 }
 
 .Pomodoro {
