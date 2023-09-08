@@ -44,3 +44,16 @@ export const filterTasksByMonth = (tasks, year, month) => {
 
   return filteredArray
 }
+
+export const sortByCategories = (tasks) => {
+  const sorted = {}
+  tasks.forEach((task) => {
+    if (!sorted[task.category]) {
+      sorted[task.category] = [task]
+    } else {
+      sorted[task.category].push(task)
+    }
+  })
+
+  return sorted
+}

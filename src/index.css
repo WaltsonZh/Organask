@@ -23,7 +23,7 @@ body {
 }
 
 body.Dark {
-  --primary-color-light: #20304a;
+  --primary-color-light: #283b5a;
   --primary-color: #8e90a7;
   --highlight-color: #505e79;
   --text-color: #e0d9e0;
@@ -317,7 +317,7 @@ body.Dark .switch::before {
   top: 40px;
   left: 50%;
   width: 250px;
-  background: white;
+  background: var(--primary-color-light);
   border-radius: 5px;
   padding: 0.5em;
   z-index: 999;
@@ -343,28 +343,52 @@ body.Dark .switch::before {
   position: absolute;
   content: '';
   border: 10px solid transparent;
-  border-bottom-color: white;
+  border-bottom-color: var(--primary-color-light);
   top: -20px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .Calendar .detail.align-right::after {
-  left: 18%
+  left: 18%;
 }
 
 .Calendar .detail.align-left::after {
-  left: 82%
+  left: 82%;
 }
 
 .Calendar .detail.align-top::after {
   border-bottom: none;
-  border-top-color: white;
+  border-top-color: var(--primary-color-light);
   top: 66px;
+}
+
+.Categories {
+  grid-template-rows: repeat(auto-fill, minmax(6.4em, 1fr));
 }
 
 .Categories--task {
   display: grid;
+  gap: 0.5em;
+}
+
+.Categories--task .folder {
+  background: var(--primary-color-light);
+  padding: 1.2em;
+}
+
+.Categories--task .folder h4 {
+  font-size: 1.5em;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.Categories--task .folder:hover {
+  background: var(--highlight-color);
+}
+
+.Categories--task .folder.hide * {
+  display: none;
 }
 
 .Pomodoro {
