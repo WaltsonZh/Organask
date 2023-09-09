@@ -3,7 +3,7 @@ import { filterTasksByMonth, getDaysOfMonth, getMonthCalendar } from '../utils'
 import { useOutletContext } from 'react-router-dom'
 
 export default function Calendar() {
-  const tasks = useOutletContext()
+  const { tasks } = useOutletContext()
   const today = new Date()
   const [date, setDate] = useState({
     day: today.getDate(),

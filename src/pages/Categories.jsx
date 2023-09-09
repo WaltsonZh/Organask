@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom'
 import { sortByCategories } from '../utils.js'
 
 export default function Categories() {
-  const tasks = useOutletContext()
+  const { tasks } = useOutletContext()
   const categorizedTasks = sortByCategories(tasks)
   const categories = Object.keys(categorizedTasks)
 

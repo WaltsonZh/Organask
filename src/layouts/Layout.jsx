@@ -7,6 +7,7 @@ import { stopTimer } from '../utils.js'
 
 export default function Layout() {
   const [tasks, setTasks] = useState([])
+  const [timeMap, setTimeMap] = useState({})
 
   useEffect(() => {
     const unsubscribe = () => {
@@ -28,8 +29,8 @@ export default function Layout() {
   return (
     <>
       <Sidebar />
-      <Outlet context={tasks} />
-      <NavLink to='addtask' className={({isActive}) => (isActive ? 'remove' : 'AddTask--btn')}>
+      <Outlet context={{ tasks, timer: { timeMap, setTimeMap } }} />
+      <NavLink to='addtask' className={({ isActive }) => (isActive ? 'remove' : 'AddTask--btn')}>
         <i className='bx bx-plus'></i>
       </NavLink>
     </>

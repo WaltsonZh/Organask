@@ -481,6 +481,7 @@ body.Dark .switch::before {
   font-size: 1.2em;
   background: var(--primary-color-light);
   border-radius: 12px;
+  cursor: pointer;
 }
 
 .PomodoroClock button:hover {
