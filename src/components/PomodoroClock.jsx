@@ -1,15 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { timeFormat } from '../utils'
+import { startTimer, stopTimer, timeFormat } from '../utils'
 
 export default function PomodoroClock({ workTime, shortBreak, longBreak, status, handleStatus }) {
   const [running, setRunning] = useState(false)
-  const timer = useRef()
   const routine = useRef(0)
   const [timeMap, setTimeMap] = useState({})
-
-  useEffect(() => {
-    return () => clearInterval(timer.current)
-  }, [])
 
   useEffect(() => {
     setTimeMap({
@@ -20,35 +15,37 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
   }, [workTime, shortBreak, longBreak])
 
   useEffect(() => {
+    localStorage.setItem('timer', timeMap[status])
     if (timeMap[status] < 0) {
       skip()
     }
   }, [timeMap])
 
   useEffect(() => {
-    if (running) start()
-  }, [status])
-
-  const toggle = () => {
-    if (running) {
-      clearInterval(timer.current)
-    } else {
-      start()
-    }
-    setRunning((prevRunning) => !prevRunning)
-  }
-
-  const start = () => {
-    timer.current = setInterval(() => {
+    if (running) startTimer(() => {
       setTimeMap((prevTimeMap) => ({
         ...prevTimeMap,
         [status]: prevTimeMap[status] - 1,
       }))
-    }, 1000)
+    })
+  }, [status])
+
+  const toggle = () => {
+    if (running) {
+      stopTimer()
+    } else {
+      startTimer(() => {
+        setTimeMap((prevTimeMap) => ({
+          ...prevTimeMap,
+          [status]: prevTimeMap[status] - 1,
+        }))
+      })
+    }
+    setRunning((prevRunning) => !prevRunning)
   }
 
   const statusChange = (e) => {
-    clearInterval(timer.current)
+    stopTimer()
     setRunning(false)
     routine.current = 0
     handleStatus(e.target.name)
@@ -60,7 +57,7 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
   }
 
   const skip = () => {
-    clearInterval(timer.current)
+    stopTimer()
     setTimeMap({
       pomodoro: workTime,
       shortBreak: shortBreak,

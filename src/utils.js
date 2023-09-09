@@ -57,3 +57,12 @@ export const sortByCategories = (tasks) => {
 
   return sorted
 }
+
+let timer = null
+export const startTimer = (callback) => {
+  timer = setInterval(callback, 1000)
+}
+
+export const stopTimer = () => {
+  clearInterval(timer)
+}

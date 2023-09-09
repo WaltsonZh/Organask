@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar'
 import { Outlet, NavLink } from 'react-router-dom'
 import { query, orderBy, onSnapshot } from 'firebase/firestore'
 import { taskCollection } from '../firebase'
+import { stopTimer } from '../utils.js'
 
 export default function Layout() {
   const [tasks, setTasks] = useState([])
@@ -18,7 +19,10 @@ export default function Layout() {
         setTasks(taskArr)
       })
     }
-    return unsubscribe
+    return () => {
+      unsubscribe()
+      stopTimer()
+    }
   }, [])
 
   return (
