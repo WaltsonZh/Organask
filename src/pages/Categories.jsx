@@ -20,9 +20,9 @@ export default function Categories() {
     <div className='Categories Page'>
       <h1>Categories</h1>
       <div className='Categories--task'>
-        {categories.map((category) => {
+        {categories.map((category, index) => {
           return (
-            <div key={category} className='folder hide' onClick={toggleFolder}>
+            <div key={index} className='folder hide' onClick={toggleFolder}>
               <h4>
                 <i className='bx bx-folder'></i>
                 {category}

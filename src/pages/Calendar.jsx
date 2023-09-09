@@ -34,13 +34,12 @@ export default function Calendar() {
   })
 
   const [monthlyCalendar, setMonthlyCalendar] = useState([])
-  const monthlyCalendarEls = monthlyCalendar.map((week) => {
-    let key = 0
+  const monthlyCalendarEls = monthlyCalendar.map((week, wIndex) => {
     return (
-      <div key={monthlyCalendar.indexOf(week)} className='monthly--week'>
-        {week.map((day) => {
+      <div key={wIndex} className='monthly--week'>
+        {week.map((day, dIndex) => {
           return (
-            <div key={key++} className={`monthly--day ${date.day === day ? 'today' : ''}`}>
+            <div key={dIndex} className={`monthly--day ${date.day === day ? 'today' : ''}`}>
               <p>{day ? day : ''}</p>
               {taskDays.map((task) => {
                 if (day === task[0] && task[0] <= task[1]) {
