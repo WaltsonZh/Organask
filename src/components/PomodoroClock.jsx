@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { startTimer, stopTimer, timeFormat } from '../utils'
 import { useOutletContext } from 'react-router-dom'
 
 export default function PomodoroClock({ workTime, shortBreak, longBreak, status, handleStatus }) {
-  const [running, setRunning] = useState(false)
   const routine = useRef(0)
   const {
     timer: { timeMap, setTimeMap },
+    run: { running, setRunning },
   } = useOutletContext()
 
   useEffect(() => {
@@ -27,7 +27,6 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
   }, [])
 
   useEffect(() => {
-    console.log(timeMap)
     localStorage.setItem('timer', timeMap[status])
     if (timeMap[status] < 0) {
       skip()
@@ -37,8 +36,8 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
   useEffect(() => {
     if (running)
       startTimer(() => {
+        localStorage.setItem('timer', timeMap[status] - 1)
         setTimeMap((prevTimeMap) => {
-          localStorage.setItem('timer', timeMap[status] - 1)
           return {
             ...prevTimeMap,
             [status]: prevTimeMap[status] - 1,
@@ -52,8 +51,8 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
       stopTimer()
     } else {
       startTimer(() => {
+        localStorage.setItem('timer', timeMap[status] - 1)
         setTimeMap((prevTimeMap) => {
-          localStorage.setItem('timer', prevTimeMap[status] - 1)
           return {
             ...prevTimeMap,
             [status]: prevTimeMap[status] - 1,
@@ -61,13 +60,19 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
         })
       })
     }
-    setRunning((prevRunning) => !prevRunning)
+    setRunning((prevRunning) => {
+      localStorage.setItem('running', !prevRunning)
+      return !prevRunning
+    })
   }
 
   const statusChange = (e) => {
     if (e.target.name === status) return
     stopTimer()
-    setRunning(false)
+    setRunning(() => {
+      localStorage.setItem('running', false)
+      return false
+    })
     routine.current = 0
     handleStatus(e.target.name)
     setTimeMap({

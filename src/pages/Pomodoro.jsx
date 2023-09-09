@@ -7,7 +7,7 @@ export default function Pomodoro() {
     shortBreak: localStorage.getItem('shortBreak') || 5,
     longBreak: localStorage.getItem('longBreak') || 15,
   })
-  const [status, setStatus] = useState('pomodoro')
+  const [status, setStatus] = useState(localStorage.getItem('status') || 'pomodoro')
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -16,6 +16,11 @@ export default function Pomodoro() {
       ...prevPomodoro,
       [name]: value,
     }))
+  }
+
+  const handleStatus = (newStatus) => {
+    localStorage.setItem('status', newStatus)
+    setStatus(newStatus)
   }
 
   return (
@@ -29,7 +34,7 @@ export default function Pomodoro() {
         <input type='number' defaultValue={pomodoro.longBreak} onChange={handleChange} name='longBreak' inputMode='numeric' />
         <label>Long Break {pomodoro.longBreak}</label>
       </form>
-      <PomodoroClock workTime={pomodoro.workTime * 60} shortBreak={pomodoro.shortBreak * 60} longBreak={pomodoro.longBreak * 60} status={status} handleStatus={(newStatus) => setStatus(newStatus)} />
+      <PomodoroClock workTime={pomodoro.workTime * 60} shortBreak={pomodoro.shortBreak * 60} longBreak={pomodoro.longBreak * 60} status={status} handleStatus={(newStatus) => handleStatus(newStatus)} />
     </div>
   )
 }
