@@ -35,30 +35,14 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
 
   useEffect(() => {
     if (running)
-      startTimer(() => {
-        localStorage.setItem('timer', timeMap[status] - 1)
-        setTimeMap((prevTimeMap) => {
-          return {
-            ...prevTimeMap,
-            [status]: prevTimeMap[status] - 1,
-          }
-        })
-      })
+      start()
   }, [status])
 
   const toggle = () => {
     if (running) {
       stopTimer()
     } else {
-      startTimer(() => {
-        localStorage.setItem('timer', timeMap[status] - 1)
-        setTimeMap((prevTimeMap) => {
-          return {
-            ...prevTimeMap,
-            [status]: prevTimeMap[status] - 1,
-          }
-        })
-      })
+      start()
     }
     setRunning((prevRunning) => {
       localStorage.setItem('running', !prevRunning)
@@ -98,6 +82,18 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
     } else {
       handleStatus('pomodoro')
     }
+  }
+
+  const start = () => {
+    startTimer(() => {
+      localStorage.setItem('timer', timeMap[status] - 1)
+      setTimeMap((prevTimeMap) => {
+        return {
+          ...prevTimeMap,
+          [status]: prevTimeMap[status] - 1,
+        }
+      })
+    })
   }
 
   return (
