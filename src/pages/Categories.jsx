@@ -31,16 +31,10 @@ export default function Categories() {
               <div className='tasks'>
                 {categorizedTasks[category].map((task) => {
                   return (
-                    <div key={task.id} className='task'>
+                    <div key={task.id} className='task' onClick={(e) => e.stopPropagation()}>
                       <h5>{task.task}</h5>
                       <p>{task.description}</p>
-                      <i
-                        className='bx bx-trash'
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          removeTask(task.id)
-                        }}
-                      ></i>
+                      <i className='bx bx-trash' onClick={() => removeTask(task.id)}></i>
                     </div>
                   )
                 })}
