@@ -499,3 +499,52 @@ body.Dark .switch::before {
 .PomodoroClock button.current {
   background: var(--body-color);
 }
+
+.Modal .content {
+  position: absolute;
+  display: grid;
+  gap: 0.6em;
+  min-width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--primary-color-light);
+  padding: 1.2em;
+  border-radius: 10px;
+  z-index: 2;
+  cursor: auto;
+}
+
+.Modal,
+.Modal .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  cursor: auto;
+}
+
+.Modal .overlay {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.Modal .close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  top: 15px;
+  right: 15px;
+  height: 1.5em;
+  width: 1.5em;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.Modal .close:hover {
+  background: var(--highlight-color);
+}

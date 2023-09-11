@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { filterTasksByMonth, getDaysOfMonth, getMonthCalendar } from '../utils'
 import { useOutletContext } from 'react-router-dom'
+import Modal from '../components/Modal.jsx'
 
 export default function Calendar() {
-  const { tasks } = useOutletContext()
+  const {
+    tasks,
+    popup: { modal, setModal },
+  } = useOutletContext()
   const today = new Date()
   const [date, setDate] = useState({
     day: today.getDate(),
@@ -34,35 +38,6 @@ export default function Calendar() {
   })
 
   const [monthlyCalendar, setMonthlyCalendar] = useState([])
-  const monthlyCalendarEls = monthlyCalendar.map((week, wIndex) => {
-    return (
-      <div key={wIndex} className='monthly--week'>
-        {week.map((day, dIndex) => {
-          return (
-            <div key={dIndex} className={`monthly--day ${date.day === day ? 'today' : ''}`}>
-              <p>{day ? day : ''}</p>
-              {taskDays.map((task) => {
-                if (day === task[0] && task[0] <= task[1]) {
-                  task[0] += 1
-                  const alignInline = week.indexOf(day) === 0 ? 'align-right' : week.indexOf(day) === 6 ? 'align-left' : ''
-                  const alignTop = monthlyCalendar[monthlyCalendar.length - 1] === week ? 'align-top' : ''
-                  return (
-                    <div key={task[2].id} className='task'>
-                      <p>{task[2].task}</p>
-                      <div className={`detail ${alignInline} ${alignTop}`}>
-                        <p>{task[2].category}</p>
-                        <p>{task[2].description}</p>
-                      </div>
-                    </div>
-                  )
-                }
-              })}
-            </div>
-          )
-        })}
-      </div>
-    )
-  })
 
   useEffect(() => {
     if (date.year === today.getFullYear() && date.month === today.getMonth()) {
@@ -114,6 +89,60 @@ export default function Calendar() {
     })
   }
 
+  const closeModal = (id) => {
+    setModal((prevModal) => ({
+      ...prevModal,
+      [id]: false,
+    }))
+  }
+
+  const openModal = (task) => {
+    setModal((prevModal) => ({
+      ...prevModal,
+      [task.id]: true,
+    }))
+  }
+
+  const monthlyCalendarEls = monthlyCalendar.map((week, wIndex) => {
+    return (
+      <div key={wIndex} className='monthly--week'>
+        {week.map((day, dIndex) => {
+          return (
+            <div key={dIndex} className={`monthly--day ${date.day === day ? 'today' : ''}`}>
+              <p>{day ? day : ''}</p>
+              {taskDays.map((task) => {
+                if (day === task[0] && task[0] <= task[1]) {
+                  task[0] += 1
+                  const alignInline = week.indexOf(day) === 0 ? 'align-right' : week.indexOf(day) === 6 ? 'align-left' : ''
+                  const alignTop = monthlyCalendar[monthlyCalendar.length - 1] === week ? 'align-top' : ''
+                  return (
+                    <div
+                      key={task[2].id}
+                      className='task'
+                      onClick={() => {
+                        openModal(task[2])
+                      }}
+                    >
+                      <p>{task[2].task}</p>
+                      <div className={`detail ${alignInline} ${alignTop}`}>
+                        <p>{task[2].category}</p>
+                        <p>{task[2].description}</p>
+                      </div>
+                    </div>
+                  )
+                }
+              })}
+            </div>
+          )
+        })}
+      </div>
+    )
+  })
+
+  const modals = tasks.map((task) => {
+    return modal[task.id] ? <Modal closeModal={closeModal} task={task} /> : null
+  })
+
   return (
     <div className='Calendar Page'>
       <h1>Calendar</h1>
@@ -130,6 +159,7 @@ export default function Calendar() {
         <button className='bx bx-navigation return' onClick={returnToday}></button>
       </div>
       <div className='calendar--grid'>{monthlyCalendarEls}</div>
+      {modals}
     </div>
   )
 }

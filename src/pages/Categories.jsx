@@ -1,10 +1,13 @@
 import { removeTask } from '../firebase'
 import { useOutletContext } from 'react-router-dom'
 import { sortByCategories } from '../utils.js'
+import Modal from '../components/Modal.jsx'
 
 export default function Categories() {
-  const { tasks } = useOutletContext()
-  console.log(tasks)
+  const {
+    tasks,
+    popup: { modal, setModal },
+  } = useOutletContext()
   const categorizedTasks = sortByCategories(tasks)
   const categories = Object.keys(categorizedTasks)
 
@@ -15,6 +18,13 @@ export default function Categories() {
     } else {
       e.target.children[0].children[0].classList.value = 'bx bx-folder'
     }
+  }
+
+  const closeModal = (id) => {
+    setModal((prevModal) => ({
+      ...prevModal,
+      [id]: false
+    }))
   }
 
   return (
@@ -32,17 +42,30 @@ export default function Categories() {
               <div className='tasks'>
                 {categorizedTasks[category].map((task) => {
                   return (
-                    <div key={task.id} className='task' onClick={(e) => e.stopPropagation()}>
-                      <h5>{task.task}</h5>
-                      <p>{task.description}</p>
-                      <i
-                        className='bx bx-trash'
+                    <>
+                      <div
+                        key={task.id}
+                        className='task'
                         onClick={(e) => {
                           e.stopPropagation()
-                          removeTask(task.id)
+                          setModal((prevModal) => ({
+                            ...prevModal,
+                            [task.id]: true
+                          }))
                         }}
-                      ></i>
-                    </div>
+                      >
+                        <h5>{task.task}</h5>
+                        <p>{task.description}</p>
+                        <i
+                          className='bx bx-trash'
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            removeTask(task.id)
+                          }}
+                        ></i>
+                      </div>
+                      {modal[task.id] ? <Modal closeModal={closeModal} task={task} /> : null}
+                    </>
                   )
                 })}
               </div>
