@@ -414,7 +414,7 @@ body.Dark .switch::before {
   padding: 1em 1.5em;
   padding-left: 5em;
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 2em;
 }
@@ -431,7 +431,6 @@ body.Dark .switch::before {
 
 .Categories--task .bx-trash {
   text-align: end;
-  pointer-events: visible;
 }
 
 .Pomodoro {

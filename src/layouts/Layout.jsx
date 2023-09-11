@@ -3,12 +3,18 @@ import Sidebar from '../components/Sidebar'
 import { Outlet, NavLink } from 'react-router-dom'
 import { query, orderBy, onSnapshot } from 'firebase/firestore'
 import { taskCollection } from '../firebase'
-import { stopTimer } from '../utils.js'
+
+/**
+ * "Real-time data fetching"
+ * works only when React.strictMode is on,
+ * because the first render will get the data,
+ * the second render is when the tasks are set.
+ */
 
 export default function Layout() {
   const [tasks, setTasks] = useState([])
-  const [timeMap, setTimeMap] = useState({})
   const [running, setRunning] = useState(false)
+  const [timeMap, setTimeMap] = useState({})
 
   useEffect(() => {
     const unsubscribe = () => {
@@ -21,16 +27,13 @@ export default function Layout() {
         setTasks(taskArr)
       })
     }
-    return () => {
-      unsubscribe()
-      stopTimer()
-    }
+    return unsubscribe
   }, [])
 
   return (
     <>
       <Sidebar />
-      <Outlet context={{ tasks, timer: { timeMap, setTimeMap }, run: { running, setRunning } }} />
+      <Outlet context={{ tasks, timer: {timeMap, setTimeMap}, run: { running, setRunning } }} />
       <NavLink to='addtask' className={({ isActive }) => (isActive ? 'remove' : 'AddTask--btn')}>
         <i className='bx bx-plus'></i>
       </NavLink>

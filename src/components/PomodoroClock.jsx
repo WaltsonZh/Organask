@@ -2,29 +2,52 @@ import React, { useRef, useEffect } from 'react'
 import { startTimer, stopTimer, timeFormat } from '../utils'
 import { useOutletContext } from 'react-router-dom'
 
+/**
+ * "Restore timer when navigate back from other route"
+ * only works when React.strictMode is off,
+ * because it makes the page render twice,
+ * hence the second render will replace the restored data with user input.
+ */
+
 export default function PomodoroClock({ workTime, shortBreak, longBreak, status, handleStatus }) {
   const routine = useRef(0)
   const {
-    timer: { timeMap, setTimeMap },
     run: { running, setRunning },
+    timer: { timeMap, setTimeMap },
   } = useOutletContext()
 
   useEffect(() => {
+    setTimeMap((prevTimeMap) => ({
+      ...prevTimeMap,
+      [status]: localStorage.getItem('timer'),
+    }))
+
+    return () => {
+      stopTimer()
+      setRunning(false)
+      localStorage.setItem('running', false)
+      localStorage.setItem('resume', true)
+    }
+  }, [])
+
+  useEffect(() => {
     setTimeMap((prevTimeMap) => {
-      if (localStorage.getItem('timer') >= 0) {
-        return {
-          ...prevTimeMap,
-          [status]: parseInt(localStorage.getItem('timer')),
+      if (localStorage.getItem('resume')) {
+        localStorage.removeItem('resume')
+        console.log('resume', status)
+        if (status === 'pomodoro') {
+          return { ...prevTimeMap, shortBreak, longBreak }
+        } else if (status === 'shortBreak') {
+          return { ...prevTimeMap, pomodoro: workTime, longBreak }
+        } else {
+          return { ...prevTimeMap, pomodoro: workTime, shortBreak }
         }
       } else {
-        return {
-          pomodoro: workTime,
-          shortBreak: shortBreak,
-          longBreak: longBreak,
-        }
+        console.log('not resume')
+        return { pomodoro: workTime, shortBreak, longBreak }
       }
     })
-  }, [])
+  }, [workTime, shortBreak, longBreak])
 
   useEffect(() => {
     localStorage.setItem('timer', timeMap[status])
@@ -34,8 +57,7 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
   }, [timeMap])
 
   useEffect(() => {
-    if (running)
-      start()
+    if (running) start()
   }, [status])
 
   const toggle = () => {
@@ -59,20 +81,12 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
     })
     routine.current = 0
     handleStatus(e.target.name)
-    setTimeMap({
-      pomodoro: workTime,
-      shortBreak: shortBreak,
-      longBreak: longBreak,
-    })
+    setTimeMap({ pomodoro: workTime, shortBreak, longBreak })
   }
 
   const skip = () => {
     stopTimer()
-    setTimeMap({
-      pomodoro: workTime,
-      shortBreak: shortBreak,
-      longBreak: longBreak,
-    })
+    setTimeMap({ pomodoro: workTime, shortBreak, longBreak })
     if (status === 'pomodoro' && routine.current < 3) {
       routine.current += 1
       handleStatus('shortBreak')

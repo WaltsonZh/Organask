@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PomodoroClock from '../components/PomodoroClock'
 
 export default function Pomodoro() {
@@ -8,6 +8,10 @@ export default function Pomodoro() {
     longBreak: localStorage.getItem('longBreak') || 15,
   })
   const [status, setStatus] = useState(localStorage.getItem('status') || 'pomodoro')
+
+  useEffect(() => {
+    localStorage.setItem('status', status)
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
