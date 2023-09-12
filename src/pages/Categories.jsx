@@ -23,7 +23,7 @@ export default function Categories() {
   const closeModal = (id) => {
     setModal((prevModal) => ({
       ...prevModal,
-      [id]: false
+      [id]: false,
     }))
   }
 
@@ -42,15 +42,14 @@ export default function Categories() {
               <div className='tasks'>
                 {categorizedTasks[category].map((task) => {
                   return (
-                    <>
+                    <div key={task.id}>
                       <div
-                        key={task.id}
                         className='task'
                         onClick={(e) => {
                           e.stopPropagation()
                           setModal((prevModal) => ({
                             ...prevModal,
-                            [task.id]: true
+                            [task.id]: true,
                           }))
                         }}
                       >
@@ -65,7 +64,7 @@ export default function Categories() {
                         ></i>
                       </div>
                       {modal[task.id] ? <Modal closeModal={closeModal} task={task} /> : null}
-                    </>
+                    </div>
                   )
                 })}
               </div>

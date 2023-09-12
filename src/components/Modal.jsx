@@ -2,11 +2,10 @@ import React from 'react'
 
 export default function Modal({ closeModal, task }) {
   return (
-    <div className='Modal'>
+    <div className='Modal' onClick={(e) => e.stopPropagation()}>
       <div
         className='overlay'
         onClick={(e) => {
-          e.stopPropagation()
           closeModal(task.id)
         }}
       ></div>
@@ -23,7 +22,7 @@ export default function Modal({ closeModal, task }) {
         <span>{task.fullday ? 'V' : 'X'}</span>
         <div
           className='close'
-          onClick={() => {
+          onClick={(e) => {
             closeModal(task.id)
           }}
         >

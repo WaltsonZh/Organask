@@ -34,7 +34,6 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
     setTimeMap((prevTimeMap) => {
       if (localStorage.getItem('resume')) {
         localStorage.removeItem('resume')
-        console.log('resume', status)
         if (status === 'pomodoro') {
           return { ...prevTimeMap, shortBreak, longBreak }
         } else if (status === 'shortBreak') {
@@ -43,7 +42,6 @@ export default function PomodoroClock({ workTime, shortBreak, longBreak, status,
           return { ...prevTimeMap, pomodoro: workTime, shortBreak }
         }
       } else {
-        console.log('not resume')
         return { pomodoro: workTime, shortBreak, longBreak }
       }
     })
