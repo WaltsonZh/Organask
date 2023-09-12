@@ -243,7 +243,7 @@ body.Dark .switch::before {
 
 .AddTask .tasktime {
   display: grid;
-  max-width: 500px;
+  max-width: 700px;
   gap: 1.8em;
 }
 
@@ -295,11 +295,6 @@ body.Dark .switch::before {
   transform: translate(5px, -100%);
   font-size: 0.9em;
   padding: 0 0.5em;
-}
-
-.AddTask input:is(:focus, :valid),
-.AddTask textarea:is(:focus, :valid) {
-  border-color: var(--text-color);
 }
 
 .AddTask .fullday {
