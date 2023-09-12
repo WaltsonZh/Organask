@@ -140,7 +140,7 @@ export default function Calendar() {
   })
 
   const modals = tasks.map((task) => {
-    return modal[task.id] ? <Modal closeModal={closeModal} task={task} /> : null
+    return modal[task.id] ? <Modal key={task.id} closeModal={closeModal} task={task} /> : null
   })
 
   return (
