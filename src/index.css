@@ -224,6 +224,103 @@ body.Dark .switch::before {
   background: var(--highlight-color);
 }
 
+.AddTask {
+  gap: 2em;
+  grid-template-rows: auto 1fr;
+}
+
+.AddTask form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8em;
+}
+
+.AddTask .head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.8em;
+}
+
+.AddTask .tasktime {
+  display: grid;
+  max-width: 500px;
+  gap: 1.8em;
+}
+
+.AddTask .input--box {
+  position: relative;
+  width: 100%;
+}
+
+.AddTask input,
+.AddTask textarea {
+  border-radius: 10px;
+  outline: none;
+  font-size: 1.2em;
+  text-indent: 16px;
+  border: 2px solid var(--primary-color);
+  background: var(--body-color);
+  width: 100%;
+  height: 3em;
+}
+
+.AddTask .description {
+  height: 250px;
+}
+
+.AddTask textarea {
+  resize: none;
+  padding: 16px;
+  text-indent: 0;
+  height: 100%;
+}
+
+.AddTask textarea::-webkit-scrollbar {
+  width: 0;
+}
+
+.AddTask span {
+  position: absolute;
+  left: 16px;
+  font-size: 1.2em;
+  top: 14px;
+  color: var(--primary-color);
+  pointer-events: none;
+}
+
+.AddTask input:is(:focus, :valid) ~ span,
+.AddTask textarea:is(:focus, :valid) ~ span {
+  color: var(--text-color);
+  background: var(--body-color);
+  transform: translate(5px, -100%);
+  font-size: 0.9em;
+  padding: 0 0.5em;
+}
+
+.AddTask input:is(:focus, :valid),
+.AddTask textarea:is(:focus, :valid) {
+  border-color: var(--text-color);
+}
+
+.AddTask .fullday {
+  display: flex;
+}
+
+.AddTask button {
+  grid-column: 1 / -1;
+  width: 300px;
+  font-size: 2em;
+  color: var(--text-color);
+  background: var(--primary-color-light);
+  border-radius: 10px;
+  cursor: pointer;
+  align-self: end;
+}
+
+.AddTask button:hover {
+  background: var(--highlight-color);
+}
+
 /* .Calendar * {
   outline: auto;
 } */

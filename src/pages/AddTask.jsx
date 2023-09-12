@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Form } from 'react-router-dom'
 import { Timestamp } from 'firebase/firestore'
 import { addTask } from '../firebase'
@@ -39,19 +39,47 @@ export default function AddTask() {
     <div className='AddTask Page'>
       <h1>AddTask</h1>
       <Form method='post'>
-        <input type='text' name='category' placeholder='Category' required />
-        <input type='date' name='startdate' required />
-        {fullDay ? <input type='date' name='enddate' required /> : null}
-        <input ref={checkbox} type='checkbox' name='fullday' onChange={(e) => setFullDay(e.target.checked)} />
-        <label htmlFor='fullday'>fullday</label>
-        {!fullDay ? (
-          <>
-            <input type='time' name='starttime' required />
-            <input type='time' name='endtime' required />
-          </>
-        ) : null}
-        <input type='text' name='task' placeholder='Task' required />
-        <input type='text' name='description' placeholder='Description' />
+        <div className='head'>
+          <div className='input--box'>
+            <input type='text' name='category' required />
+            <span>Category</span>
+          </div>
+          <div className='fullday'>
+            <input ref={checkbox} type='checkbox' name='fullday' onChange={(e) => setFullDay(e.target.checked)} />
+            <label htmlFor='fullday'>fullday</label>
+          </div>
+        </div>
+        <div className='tasktime'>
+          <div className='time--box'>
+            <label htmlFor='startdate'>Start Date</label>
+            <input type='date' name='startdate' required />
+          </div>
+          {fullDay ? (
+            <div className='time--box'>
+              <label htmlFor='enddate'>End Date</label>
+              <input type='date' name='enddate' required />
+            </div>
+          ) : (
+            <>
+              <div className='time--box'>
+                <label htmlFor='starttime'>Start time</label>
+                <input type='time' name='starttime' required />
+              </div>
+              <div className='time--box'>
+                <label htmlFor='endtime'>End Time</label>
+                <input className='endtime' type='time' name='endtime' required />
+              </div>
+            </>
+          )}
+        </div>
+        <div className='input--box'>
+          <input type='text' name='task' required />
+          <span>Task</span>
+        </div>
+        <div className='input--box description'>
+          <textarea type='text' name='description' required />
+          <span>Description</span>
+        </div>
         <button>submit</button>
       </Form>
     </div>
