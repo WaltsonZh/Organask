@@ -298,7 +298,47 @@ body.Dark .switch::before {
 }
 
 .AddTask .fullday {
+  display: grid;
   display: flex;
+  place-items: center;
+  gap: 0.5em;
+  font-size: 1.2em;
+}
+
+.AddTask .fullday label {
+  padding: 2px 5px;
+}
+
+.AddTask .fullday input {
+  height: 26px;
+  width: 54px;
+  border-radius: 14px;
+  appearance: none;
+  border: none;
+  background: var(--primary-color-light);
+  position: relative;
+  cursor: pointer;
+}
+
+.AddTask .fullday input::after {
+  position: absolute;
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  top: 3px;
+  left: 4px;
+  transition: all 0.3s;
+}
+
+.AddTask .fullday input:checked::after {
+  left: 30px;
+}
+
+.AddTask .fullday .selected {
+  background: var(--highlight-color);
+  border-radius: 10px;
 }
 
 .AddTask button {

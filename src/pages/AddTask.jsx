@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Form } from 'react-router-dom'
 import { Timestamp } from 'firebase/firestore'
 import { addTask } from '../firebase'
@@ -37,7 +37,7 @@ export default function AddTask() {
 
   return (
     <div className='AddTask Page'>
-      <h1>AddTask</h1>
+      <h1>Add Task</h1>
       <Form method='post'>
         <div className='head'>
           <div className='input--box'>
@@ -45,28 +45,29 @@ export default function AddTask() {
             <span>Category</span>
           </div>
           <div className='fullday'>
+            <label className={fullDay ? '' : 'selected'}>One Day</label>
             <input ref={checkbox} type='checkbox' name='fullday' onChange={(e) => setFullDay(e.target.checked)} />
-            <label htmlFor='fullday'>fullday</label>
+            <label className={fullDay ? 'selected' : ''}>Full Day</label>
           </div>
         </div>
         <div className='tasktime'>
           <div className='time--box'>
-            <label htmlFor='startdate'>Start Date</label>
+            <label>Start Date</label>
             <input type='date' name='startdate' required />
           </div>
           {fullDay ? (
             <div className='time--box'>
-              <label htmlFor='enddate'>End Date</label>
+              <label>End Date</label>
               <input type='date' name='enddate' required />
             </div>
           ) : (
             <>
               <div className='time--box'>
-                <label htmlFor='starttime'>Start time</label>
+                <label>Start time</label>
                 <input type='time' name='starttime' required />
               </div>
               <div className='time--box'>
-                <label htmlFor='endtime'>End Time</label>
+                <label>End Time</label>
                 <input className='endtime' type='time' name='endtime' required />
               </div>
             </>
