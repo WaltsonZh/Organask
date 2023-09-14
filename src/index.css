@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   border: none;
+  outline: none;
   transition: all 0.3s;
   color: var(--text-color);
 }
@@ -257,7 +258,7 @@ body.Dark .switch::before {
   border-radius: 10px;
   outline: none;
   font-size: 1.2em;
-  text-indent: 16px;
+  padding: 0 16px;
   border: 2px solid var(--primary-color);
   background: var(--body-color);
   width: 100%;
@@ -412,24 +413,51 @@ body.Dark .switch::before {
 
 .Calendar .monthly--day {
   border: var(--primary-color-light) 1px solid;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4em;
   padding: 0.2em 0.5em;
   min-width: 100px;
+  overflow-x: visible;
 }
 
 .Calendar .monthly--day.today {
   background: var(--highlight-color);
 }
 
+.Calendar .dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.Calendar .dropdown:hover ~ .tasks {
+  display: block;
+}
+
+.Calendar .dropdown .bx {
+  background: transparent;
+  font-size: 0.8em;
+}
+
+.Calendar .tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  display: none;
+}
+
+.Calendar .tasks:hover {
+  display: block;
+}
+
 .Calendar .task {
   position: relative;
+  list-style: none;
 }
 
 .Calendar .task > p {
   overflow: hidden;
   text-overflow: ellipsis;
+  text-wrap: nowrap;
   font-size: 0.9em;
   background-color: var(--primary-color-light);
   border-radius: 5px;
@@ -459,6 +487,12 @@ body.Dark .switch::before {
   opacity: 0;
   transform: translateX(-50%);
   pointer-events: none;
+}
+
+.Calendar .detail > p {
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Calendar .detail.align-right {

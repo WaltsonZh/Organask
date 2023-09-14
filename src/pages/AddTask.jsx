@@ -39,8 +39,6 @@ export default function AddTask() {
   const [startDate, setStartDate] = useState(dateFormat(now))
   const [startTime, setStartTime] = useState('')
 
-  console.log(startDate, dateFormat(now), `${now.getHours()}:${now.getMinutes()}`)
-
   return (
     <div className='AddTask Page'>
       <h1>Add Task</h1>

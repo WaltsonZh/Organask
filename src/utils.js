@@ -1,3 +1,5 @@
+export const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
 export const getMonthCalendar = (date) => {
   const { month, year } = date
   const first = new Date(year, month)

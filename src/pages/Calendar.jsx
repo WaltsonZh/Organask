@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { filterTasksByMonth, getDaysOfMonth, getMonthCalendar } from '../utils'
+import { monthName, filterTasksByMonth, getDaysOfMonth, getMonthCalendar } from '../utils'
 import { useOutletContext } from 'react-router-dom'
 import Modal from '../components/Modal.jsx'
 
@@ -14,7 +14,7 @@ export default function Calendar() {
     month: today.getMonth(),
     year: today.getFullYear(),
   })
-  const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  const taskCountOfDays = Array(31).fill(0)
 
   const taskOfMonth = filterTasksByMonth(tasks, date.year, date.month)
   const taskDays = taskOfMonth.map((task) => {
@@ -33,6 +33,10 @@ export default function Calendar() {
     }
 
     daysArr.push(task)
+
+    for (let i = daysArr[0]; i <= daysArr[1]; i++) {
+      taskCountOfDays[i - 1] += 1
+    }
 
     return daysArr
   })
@@ -107,31 +111,39 @@ export default function Calendar() {
     return (
       <div key={wIndex} className='monthly--week'>
         {week.map((day, dIndex) => {
+          const taskCount = taskCountOfDays[day - 1]
           return (
             <div key={dIndex} className={`monthly--day ${date.day === day ? 'today' : ''}`}>
               <p>{day ? day : ''}</p>
-              {taskDays.map((task) => {
-                if (day === task[0] && task[0] <= task[1]) {
-                  task[0] += 1
-                  const alignInline = week.indexOf(day) === 0 ? 'align-right' : week.indexOf(day) === 6 ? 'align-left' : ''
-                  const alignTop = monthlyCalendar[monthlyCalendar.length - 1] === week ? 'align-top' : ''
-                  return (
-                    <div
-                      key={task[2].id}
-                      className='task'
-                      onClick={() => {
-                        openModal(task[2])
-                      }}
-                    >
-                      <p>{task[2].task}</p>
-                      <div className={`detail ${alignInline} ${alignTop}`}>
-                        <p>{task[2].category}</p>
-                        <p>{task[2].description}</p>
-                      </div>
-                    </div>
-                  )
-                }
-              })}
+              <div className={`dropdown ${taskCount ? '' : 'remove'}`}>
+                {taskCount ? `${taskCount} task${taskCount > 1 ? 's' : ''}` : ''}
+                <i class='bx bxs-down-arrow'></i>
+              </div>
+              <ul className='tasks'>
+                {taskDays.map((task) => {
+                  if (day === task[0] && task[0] <= task[1]) {
+                    task[0] += 1
+                    taskCountOfDays[day - 1] += 1
+                    const alignInline = week.indexOf(day) === 0 ? 'align-right' : week.indexOf(day) === 6 ? 'align-left' : ''
+                    const alignTop = monthlyCalendar[monthlyCalendar.length - 1] === week ? 'align-top' : ''
+                    return (
+                      <li
+                        key={task[2].id}
+                        className='task'
+                        onClick={() => {
+                          openModal(task[2])
+                        }}
+                      >
+                        <p>{task[2].task}</p>
+                        <div className={`detail ${alignInline} ${alignTop}`}>
+                          <p>{task[2].category}</p>
+                          <p>{task[2].description}</p>
+                        </div>
+                      </li>
+                    )
+                  }
+                })}
+              </ul>
             </div>
           )
         })}
