@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Form } from 'react-router-dom'
 import { Timestamp } from 'firebase/firestore'
 import { addTask } from '../firebase'
+import { dateFormat, timeFormat } from '../utils.js'
 
 export const action = async ({ request }) => {
   const formData = await request.formData()
@@ -34,6 +35,11 @@ export const action = async ({ request }) => {
 export default function AddTask() {
   const [fullDay, setFullDay] = useState(false)
   const checkbox = useRef()
+  const now = new Date()
+  const [startDate, setStartDate] = useState(dateFormat(now))
+  const [startTime, setStartTime] = useState('')
+
+  console.log(startDate, dateFormat(now), `${now.getHours()}:${now.getMinutes()}`)
 
   return (
     <div className='AddTask Page'>
@@ -53,22 +59,22 @@ export default function AddTask() {
         <div className='tasktime'>
           <div className='time--box'>
             <label>Start Date</label>
-            <input type='date' name='startdate' required />
+            <input type='date' name='startdate' defaultValue={dateFormat(now)} min={dateFormat(now)} onChange={(e) => setStartDate(e.target.value)} required />
           </div>
           {fullDay ? (
             <div className='time--box'>
               <label>End Date</label>
-              <input type='date' name='enddate' required />
+              <input type='date' name='enddate' min={startDate} required />
             </div>
           ) : (
             <>
               <div className='time--box'>
                 <label>Start time</label>
-                <input type='time' name='starttime' required />
+                <input type='time' name='starttime' min={startDate === dateFormat(now) ? `${now.getHours()}:${now.getMinutes()}` : ''} onChange={(e) => setStartTime(e.target.value)} required />
               </div>
               <div className='time--box'>
                 <label>End Time</label>
-                <input className='endtime' type='time' name='endtime' required />
+                <input type='time' name='endtime' min={startTime} required />
               </div>
             </>
           )}

@@ -32,6 +32,10 @@ export const timeFormat = (time) => {
   return `${hour > 0 ? hour + ':' : ''}${min < 10 ? 0 : ''}${min}:${sec < 10 ? 0 : ''}${sec}`
 }
 
+export const dateFormat = (date) => {
+  return `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1}-${date.getDate()}`
+}
+
 export const filterTasksByMonth = (tasks, year, month) => {
   const filteredArray = []
   const range = [new Date(year, month), new Date(year + Math.floor((month + 1) / 12), (month + 1) % 12)]
