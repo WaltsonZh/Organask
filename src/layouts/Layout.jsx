@@ -3,7 +3,6 @@ import Sidebar from '../components/Sidebar'
 import { Outlet, NavLink } from 'react-router-dom'
 import { query, orderBy, onSnapshot } from 'firebase/firestore'
 import { taskCollection } from '../firebase'
-import Modal from '../components/Modal.jsx'
 
 /**
  * "Real-time data fetching"
@@ -16,7 +15,7 @@ export default function Layout() {
   const [tasks, setTasks] = useState([])
   const [running, setRunning] = useState(false)
   const [timeMap, setTimeMap] = useState({})
-  const [modal, setModal] = useState([])
+  const [modal, setModal] = useState({})
 
   useEffect(() => {
     const unsubscribe = () => {
@@ -33,7 +32,12 @@ export default function Layout() {
   }, [])
 
   useEffect(() => {
-    tasks.forEach((task) => modal.push({ [task.id]: false }))
+    tasks.forEach((task) =>
+      setModal((prevModal) => ({
+        ...prevModal,
+        [task.id]: false,
+      }))
+    )
   }, [tasks])
 
   return (
