@@ -441,7 +441,7 @@ body.Dark .switch::before {
 
 .Calendar .tasks {
   position: absolute;
-  top: 3.2em;
+  top: 3.4em;
   left: 0.5em;
   right: 0.5em;
   display: flex;
@@ -560,10 +560,15 @@ body.Dark .switch::before {
   padding: 1.2em;
   pointer-events: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(1em, 1fr));
+  grid-template-columns: auto 1fr auto;
   gap: 1em;
-  white-space: nowrap;
   align-items: center;
+}
+
+.Categories--task .folder h4 p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
 }
 
 .Categories--task .bx-chevron-up {
@@ -595,6 +600,17 @@ body.Dark .switch::before {
 .Categories--task .task h5 {
   font-size: 1.2em;
   font-weight: 600;
+  max-width: 400px;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Categories--task .task p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 .Categories--task .task:hover {
@@ -604,6 +620,12 @@ body.Dark .switch::before {
 
 .Categories--task .bx-trash {
   text-align: end;
+  padding: 0.2em;
+  border-radius: 50%;
+}
+
+.Categories--task .bx-trash:hover {
+  background: var(--primary-color-light);
 }
 
 .Pomodoro {
@@ -682,6 +704,7 @@ body.Dark .switch::before {
   display: grid;
   gap: 0.6em;
   min-width: 400px;
+  max-height: 80%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -689,6 +712,21 @@ body.Dark .switch::before {
   padding: 1.2em;
   border-radius: 10px;
   cursor: auto;
+  overflow: auto;
+}
+
+.Modal .content::-webkit-scrollbar {
+  width: 1em;
+}
+
+.Modal .content::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.Modal .content::-webkit-scrollbar-thumb {
+  border: 3px var(--primary-color-light) solid;
+  background: var(--highlight-color);
+  border-radius: 10px;
 }
 
 .Modal,

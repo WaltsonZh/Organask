@@ -36,7 +36,7 @@ export default function Categories() {
             <div key={index} className='folder hide' onClick={toggleFolder}>
               <h4>
                 <i className='bx bx-folder'></i>
-                {category}
+                <p>{category}</p>
                 <i className='bx bx-chevron-up'></i>
               </h4>
               <div className='tasks'>
