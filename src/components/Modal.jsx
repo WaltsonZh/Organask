@@ -1,6 +1,9 @@
 import React from 'react'
 
 export default function Modal({ closeModal, task }) {
+  const start = task.startTimestamp.toDate()
+  const end = task.endTimestamp.toDate()
+
   return (
     <div className='Modal' onClick={(e) => e.stopPropagation()}>
       <div
@@ -13,10 +16,10 @@ export default function Modal({ closeModal, task }) {
         <h1>{task.task}</h1>
         <p>{task.description}</p>
         <b>start: </b>
-        <span>{task.startTimestamp.toDate().toDateString()}</span>
+        <span>{task.fullday ? start.toDateString() : `${start.getHours()}:${start.getMinutes()}`}</span>
         <br />
         <b>end: </b>
-        <span>{task.endTimestamp.toDate().toDateString()}</span>
+        <span>{task.fullday ? end.toDateString() : `${end.getHours()}:${end.getMinutes()}`}</span>
         <br />
         <b>Fullday: </b>
         <span>{task.fullday ? 'V' : 'X'}</span>
