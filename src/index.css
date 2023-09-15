@@ -416,6 +416,7 @@ body.Dark .switch::before {
   padding: 0.2em 0.5em;
   min-width: 100px;
   overflow-x: visible;
+  position: relative;
 }
 
 .Calendar .monthly--day.today {
@@ -439,10 +440,15 @@ body.Dark .switch::before {
 }
 
 .Calendar .tasks {
+  position: absolute;
+  top: 3.2em;
+  left: 0.5em;
+  right: 0.5em;
   display: flex;
   flex-direction: column;
   gap: 0.4em;
   display: none;
+  z-index: 2;
 }
 
 .Calendar .tasks:hover {
@@ -460,13 +466,14 @@ body.Dark .switch::before {
   text-wrap: nowrap;
   font-size: 0.9em;
   background-color: var(--primary-color-light);
-  border-radius: 5px;
   cursor: pointer;
-  padding: 0 0.4em;
+  padding: 0.2em 0.4em;
 }
 
 .Calendar .task:hover > p {
   transform: scale(1.25);
+  border-radius: 5px;
+  border: var(--primary-color) 1px solid;
 }
 
 .Calendar .task > p:hover + .detail {
@@ -476,7 +483,7 @@ body.Dark .switch::before {
 
 .Calendar .detail {
   position: absolute;
-  top: 40px;
+  top: 48px;
   left: 50%;
   width: 250px;
   background: var(--white-background);
@@ -666,6 +673,10 @@ body.Dark .switch::before {
   background: var(--body-color);
 }
 
+.Modal {
+  z-index: 999;
+}
+
 .Modal .content {
   position: absolute;
   display: grid;
@@ -677,7 +688,6 @@ body.Dark .switch::before {
   background: var(--primary-color-light);
   padding: 1.2em;
   border-radius: 10px;
-  z-index: 2;
   cursor: auto;
 }
 

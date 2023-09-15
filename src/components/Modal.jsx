@@ -5,7 +5,7 @@ export default function Modal({ closeModal, task }) {
     <div className='Modal' onClick={(e) => e.stopPropagation()}>
       <div
         className='overlay'
-        onClick={(e) => {
+        onClick={() => {
           closeModal(task.id)
         }}
       ></div>
@@ -22,7 +22,7 @@ export default function Modal({ closeModal, task }) {
         <span>{task.fullday ? 'V' : 'X'}</span>
         <div
           className='close'
-          onClick={(e) => {
+          onClick={() => {
             closeModal(task.id)
           }}
         >
