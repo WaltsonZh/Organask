@@ -68,10 +68,6 @@ body.Dark {
   top: 0;
 }
 
-/* .Sidebar * {
-  outline: auto;
-} */
-
 .Sidebar--title {
   display: flex;
   align-items: center;
@@ -249,12 +245,13 @@ body.Dark .switch::before {
   gap: 1.8em;
 }
 
-.AddTask .input--box {
+.input--box {
   position: relative;
   width: 100%;
 }
 
 .AddTask input,
+.Pomodoro input,
 .AddTask textarea {
   border-radius: 10px;
   outline: none;
@@ -281,7 +278,8 @@ body.Dark .switch::before {
   width: 0;
 }
 
-.AddTask span {
+.AddTask span,
+.Pomodoro span {
   position: absolute;
   left: 16px;
   font-size: 1.2em;
@@ -291,6 +289,7 @@ body.Dark .switch::before {
 }
 
 .AddTask input:is(:focus, :valid) ~ span,
+.Pomodoro input:is(:focus, :valid) ~ span,
 .AddTask textarea:is(:focus, :valid) ~ span {
   color: var(--text-color);
   background: var(--body-color);
@@ -357,10 +356,6 @@ body.Dark .switch::before {
 .AddTask button:hover {
   background: var(--highlight-color);
 }
-
-/* .Calendar * {
-  outline: auto;
-} */
 
 .Calendar {
   grid-template-rows: repeat(auto-fill, minmax(3.6em, 1fr));
@@ -638,6 +633,11 @@ body.Dark .switch::before {
   place-self: start;
 }
 
+.Pomodoro form {
+  display: flex;
+  gap: 2em;
+}
+
 .PomodoroClock {
   background: var(--highlight-color);
   width: 700px;
@@ -649,10 +649,6 @@ body.Dark .switch::before {
   place-content: center;
   grid-template-columns: repeat(3, 1fr);
 }
-
-/* .Pomodoro * {
-  outline: auto;
-} */
 
 .PomodoroClock .run,
 .PomodoroClock h1 {

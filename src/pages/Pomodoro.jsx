@@ -31,12 +31,18 @@ export default function Pomodoro() {
     <div className='Pomodoro Page'>
       <h1>Pomodoro</h1>
       <form>
-        <input type='number' defaultValue={pomodoro.workTime} onChange={handleChange} name='workTime' inputMode='numeric' />
-        <label>Pomodoro {pomodoro.workTime}</label>
-        <input type='number' defaultValue={pomodoro.shortBreak} onChange={handleChange} name='shortBreak' inputMode='numeric' />
-        <label>Short Break {pomodoro.shortBreak}</label>
-        <input type='number' defaultValue={pomodoro.longBreak} onChange={handleChange} name='longBreak' inputMode='numeric' />
-        <label>Long Break {pomodoro.longBreak}</label>
+        <div className='input--box'>
+          <input type='number' min={0} defaultValue={pomodoro.workTime} onChange={handleChange} name='workTime' required />
+          <span>Pomodoro</span>
+        </div>
+        <div className='input--box'>
+          <input type='number' min={0} defaultValue={pomodoro.shortBreak} onChange={handleChange} name='shortBreak' required />
+          <span>Short Break</span>
+        </div>
+        <div className='input--box'>
+          <input type='number' min={0} defaultValue={pomodoro.longBreak} onChange={handleChange} name='longBreak' required />
+          <span>Long Break</span>
+        </div>
       </form>
       <PomodoroClock workTime={pomodoro.workTime * 60} shortBreak={pomodoro.shortBreak * 60} longBreak={pomodoro.longBreak * 60} status={status} handleStatus={(newStatus) => handleStatus(newStatus)} />
     </div>
