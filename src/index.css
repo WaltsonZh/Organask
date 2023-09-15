@@ -357,6 +357,11 @@ body.Dark .switch::before {
   background: var(--highlight-color);
 }
 
+.finish {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
 .Calendar {
   grid-template-rows: repeat(auto-fill, minmax(3.6em, 1fr));
 }
@@ -585,12 +590,22 @@ body.Dark .switch::before {
 
 .Categories--task .task {
   background: var(--primary-color-light);
-  padding: 1em 1.5em;
-  padding-left: 5em;
+  padding: 1em 1.8em;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto auto 1fr auto;
   align-items: center;
   gap: 2em;
+}
+
+.Categories--task .task span {
+  display: flex;
+  border-radius: 50%;
+  padding: 0.5em;
+}
+
+.Categories--task .task span:hover {
+  background: var(--primary-color-light);
+  
 }
 
 .Categories--task .task h5 {

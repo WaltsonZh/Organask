@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Form } from 'react-router-dom'
 import { Timestamp } from 'firebase/firestore'
 import { addTask } from '../firebase'
-import { dateFormat, timeFormat } from '../utils.js'
+import { dateFormat } from '../utils.js'
 
 export const action = async ({ request }) => {
   const formData = await request.formData()
@@ -26,6 +26,7 @@ export const action = async ({ request }) => {
     startTimestamp,
     endTimestamp,
     fullday: data.fullday ? true : false,
+    finish: false,
   }
   addTask(data)
 

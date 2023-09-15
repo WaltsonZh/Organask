@@ -135,7 +135,7 @@ export default function Calendar() {
                           openModal(task[2])
                         }}
                       >
-                        <p>{task[2].task}</p>
+                        <p className={task[2].finish ? 'finish' : ''}>{task[2].task}</p>
                         <div className={`detail ${alignInline} ${alignTop}`}>
                           <p>{task[2].category}</p>
                           <p>{task[2].description}</p>

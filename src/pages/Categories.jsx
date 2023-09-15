@@ -1,4 +1,4 @@
-import { removeTask } from '../firebase'
+import { removeTask, updateTask } from '../firebase'
 import { useOutletContext } from 'react-router-dom'
 import { sortByCategories } from '../utils.js'
 import Modal from '../components/Modal.jsx'
@@ -53,8 +53,16 @@ export default function Categories() {
                           }))
                         }}
                       >
-                        <h5>{task.task}</h5>
-                        <p>{task.description}</p>
+                        <span
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            updateTask(task.id, { finish: !task.finish })
+                          }}
+                        >
+                          {task.finish ? <i className='bx bx-checkbox-checked'></i> : <i className='bx bx-checkbox'></i>}
+                        </span>
+                        <h5 className={task.finish ? 'finish' : ''}>{task.task}</h5>
+                        <p className={task.finish ? 'finish' : ''}>{task.description}</p>
                         <i
                           className='bx bx-trash'
                           onClick={(e) => {
