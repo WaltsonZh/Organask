@@ -112,12 +112,13 @@ export default function Calendar() {
       <div key={wIndex} className='monthly--week'>
         {week.map((day, dIndex) => {
           const taskCount = taskCountOfDays[day - 1]
+          console.log(taskCount)
           return (
             <div key={dIndex} className={`monthly--day ${date.day === day ? 'today' : ''}`}>
               <p>{day ? day : ''}</p>
-              <div className={`dropdown ${taskCount ? '' : 'remove'}`}>
+              <div className='dropdown'>
                 {taskCount ? `${taskCount} task${taskCount > 1 ? 's' : ''}` : ''}
-                <i class='bx bxs-down-arrow'></i>
+                <i className={`bx bxs-down-arrow ${taskCount ? '' : 'remove'}`}></i>
               </div>
               <ul className='tasks'>
                 {taskDays.map((task) => {
