@@ -234,6 +234,8 @@ body.Dark .switch::before {
   display: flex;
   flex-direction: column;
   gap: 1.8em;
+  max-width: 1000px;
+  place-self: center;
 }
 
 .AddTask .head {
@@ -244,7 +246,6 @@ body.Dark .switch::before {
 
 .AddTask .tasktime {
   display: grid;
-  max-width: 700px;
   gap: 1.8em;
 }
 
