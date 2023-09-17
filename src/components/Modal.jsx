@@ -1,6 +1,5 @@
-import React from 'react'
-
-export default function Modal({ closeModal, task }) {
+export default function Modal(prop) {
+  const { closeModal, task } = prop
   const start = task.startTimestamp.toDate()
   const end = task.endTimestamp.toDate()
 

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { startTimer, stopTimer, timeFormat } from '../utils'
 import { useOutletContext } from 'react-router-dom'
 
@@ -9,7 +9,8 @@ import { useOutletContext } from 'react-router-dom'
  * hence the second render will replace the restored data with user input.
  */
 
-export default function PomodoroClock({ workTime, shortBreak, longBreak, status, handleStatus }) {
+export default function PomodoroClock(prop) {
+  const { workTime, shortBreak, longBreak, status, handleStatus } = prop
   const routine = useRef(0)
   const {
     run: { running, setRunning },

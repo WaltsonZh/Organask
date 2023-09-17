@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import { Outlet, NavLink } from 'react-router-dom'
 import { query, orderBy, onSnapshot } from 'firebase/firestore'

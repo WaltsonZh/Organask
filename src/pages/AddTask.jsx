@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Form } from 'react-router-dom'
 import { Timestamp } from 'firebase/firestore'
 import { addTask } from '../firebase'

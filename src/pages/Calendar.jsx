@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { monthName, filterTasksByMonth, getDaysOfMonth, getMonthCalendar } from '../utils'
 import { useOutletContext } from 'react-router-dom'
 import Modal from '../components/Modal.jsx'
@@ -112,7 +112,6 @@ export default function Calendar() {
       <div key={wIndex} className='monthly--week'>
         {week.map((day, dIndex) => {
           const taskCount = taskCountOfDays[day - 1]
-          console.log(taskCount)
           return (
             <div key={dIndex} className={`monthly--day ${date.day === day ? 'today' : ''}`}>
               <p>{day ? day : ''}</p>

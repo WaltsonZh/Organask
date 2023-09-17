@@ -1,4 +1,3 @@
-import React from 'react'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import Layout from './layouts/Layout'
 import Error from './pages/Error'

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import PomodoroClock from '../components/PomodoroClock'
 
 export default function Pomodoro() {
