@@ -134,6 +134,16 @@ body.Dark {
   background: var(--highlight-color);
 }
 
+.Sidebar--login {
+  grid-row: -2;
+}
+
+.Sidebar--login img {
+  height: 40px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
 .Sidebar--mode {
   grid-row: -1;
   position: relative;

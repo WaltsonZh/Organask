@@ -1,9 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { auth, provider } from '../firebase'
+import { getRedirectResult, signInWithRedirect, signOut } from 'firebase/auth'
 
 export default function Sidebar() {
   const [fold, setFold] = useState(false)
   const [mode, setMode] = useState(true)
+  const [currentUser, setCurrentUser] = useState(null)
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
+  const getUser = async () => {
+    const result = await getRedirectResult(auth)
+    if (result) {
+      setCurrentUser(result.user)
+    }
+  }
 
   const toggleFold = () => {
     setFold((prevFold) => !prevFold)
@@ -12,6 +26,19 @@ export default function Sidebar() {
   const toggleMode = () => {
     setMode((prevMode) => !prevMode)
     document.querySelector('body').classList.toggle('Dark')
+  }
+
+  const account = async () => {
+    try {
+      if (currentUser) {
+        await signOut(auth)
+        setCurrentUser(null)
+      } else {
+        signInWithRedirect(auth, provider)
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -38,6 +65,11 @@ export default function Sidebar() {
           <i className='bx bx-stopwatch'></i>
           <span>Pomodoro</span>
         </NavLink>
+        <div className='Sidebar--label Sidebar--login' onClick={account}>
+          <i className={`bx ${currentUser ? 'bx-log-out' : 'bxl-google'}`}></i>
+          <span>{currentUser ? 'Log out' : 'Login with Google'}</span>
+          {currentUser ? <img src={currentUser.photoURL} /> : null}
+        </div>
         <div className='Sidebar--mode Sidebar--label' onClick={toggleMode}>
           <div className='mode--icon'>
             <i className='bx bx-moon'></i>

@@ -28,6 +28,7 @@ export default function Layout() {
         setTasks(taskArr)
       })
     }
+
     return unsubscribe
   }, [])
 
@@ -43,7 +44,14 @@ export default function Layout() {
   return (
     <>
       <Sidebar />
-      <Outlet context={{ tasks, timer: { timeMap, setTimeMap }, run: { running, setRunning }, popup: { modal, setModal } }} />
+      <Outlet
+        context={{
+          tasks,
+          timer: { timeMap, setTimeMap },
+          run: { running, setRunning },
+          popup: { modal, setModal },
+        }}
+      />
       <NavLink to='addtask' className={({ isActive }) => (isActive ? 'remove' : 'AddTask--btn')}>
         <i className='bx bx-plus'></i>
       </NavLink>

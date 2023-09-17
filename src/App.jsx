@@ -5,7 +5,7 @@ import Calendar from './pages/Calendar'
 import Dashboard from './pages/Dashboard'
 import Categories from './pages/Categories'
 import Pomodoro from './pages/Pomodoro'
-import AddTask, {action as addTaskAction} from './pages/AddTask'
+import AddTask, { action as addTaskAction } from './pages/AddTask'
 
 export default function App() {
   const router = createBrowserRouter(

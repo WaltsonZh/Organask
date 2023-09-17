@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+import { GoogleAuthProvider, getAuth } from 'firebase/auth'
 import { addDoc, collection, deleteDoc, doc, getFirestore, updateDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -13,8 +13,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-export const auth = getAuth(app)
 export const taskCollection = collection(db, 'tasks')
+export const auth = getAuth(app)
+export const provider = new GoogleAuthProvider()
 
 export const addTask = async (taskData) => {
   await addDoc(taskCollection, taskData)
