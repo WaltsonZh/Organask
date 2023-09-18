@@ -10,7 +10,7 @@ export default function Sidebar(prop) {
   const [login, setLogin] = useState(false)
 
   useEffect(() => {
-    setLogin(localStorage.getItem('isLoggedIn') || false)
+    setLogin(JSON.parse(localStorage.getItem('isLoggedIn')) || false)
   }, [])
 
   const toggleFold = () => {
