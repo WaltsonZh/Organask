@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import { Outlet, NavLink } from 'react-router-dom'
 import { query, orderBy, onSnapshot } from 'firebase/firestore'
-import { taskCollection } from '../firebase'
+import { auth, taskCollection } from '../firebase'
+import { onAuthStateChanged } from 'firebase/auth'
 
 /**
  * "Real-time data fetching"
@@ -16,6 +17,7 @@ export default function Layout() {
   const [running, setRunning] = useState(false)
   const [timeMap, setTimeMap] = useState({})
   const [modal, setModal] = useState({})
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     const unsubscribe = () => {
@@ -29,6 +31,8 @@ export default function Layout() {
       })
     }
 
+    getUser()
+
     return unsubscribe
   }, [])
 
@@ -41,9 +45,15 @@ export default function Layout() {
     )
   }, [tasks])
 
+  const getUser = () => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+    })
+  }
+
   return (
     <>
-      <Sidebar />
+      <Sidebar user={user} />
       <Outlet
         context={{
           tasks,

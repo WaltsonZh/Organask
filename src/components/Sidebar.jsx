@@ -1,23 +1,17 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { auth, provider } from '../firebase'
-import { getRedirectResult, signInWithRedirect, signOut } from 'firebase/auth'
+import { signInWithRedirect, signOut } from 'firebase/auth'
 
-export default function Sidebar() {
+export default function Sidebar(prop) {
+  const { user } = prop
   const [fold, setFold] = useState(false)
   const [mode, setMode] = useState(true)
-  const [currentUser, setCurrentUser] = useState(null)
+  const [login, setLogin] = useState(false)
 
   useEffect(() => {
-    getUser()
+    setLogin(localStorage.getItem('isLoggedIn') || false)
   }, [])
-
-  const getUser = async () => {
-    const result = await getRedirectResult(auth)
-    if (result) {
-      setCurrentUser(result.user)
-    }
-  }
 
   const toggleFold = () => {
     setFold((prevFold) => !prevFold)
@@ -30,11 +24,13 @@ export default function Sidebar() {
 
   const account = async () => {
     try {
-      if (currentUser) {
+      if (user) {
+        localStorage.setItem('isLoggedIn', false)
+        setLogin(false)
         await signOut(auth)
-        setCurrentUser(null)
       } else {
-        signInWithRedirect(auth, provider)
+        localStorage.setItem('isLoggedIn', true)
+        await signInWithRedirect(auth, provider)
       }
     } catch (err) {
       console.log(err)
@@ -66,9 +62,9 @@ export default function Sidebar() {
           <span>Pomodoro</span>
         </NavLink>
         <div className='Sidebar--label Sidebar--login' onClick={account}>
-          <i className={`bx ${currentUser ? 'bx-log-out' : 'bxl-google'}`}></i>
-          <span>{currentUser ? 'Log out' : 'Login with Google'}</span>
-          {currentUser ? <img src={currentUser.photoURL} /> : null}
+          <i className={`bx ${login ? 'bx-log-out' : 'bxl-google'}`}></i>
+          <span>{login ? 'Log out' : 'Login with Google'}</span>
+          {login && user === null ? <i className='bx bx-user-circle'></i> : user ? <img src={user.photoURL} /> : null}
         </div>
         <div className='Sidebar--mode Sidebar--label' onClick={toggleMode}>
           <div className='mode--icon'>
