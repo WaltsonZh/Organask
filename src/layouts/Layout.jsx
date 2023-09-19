@@ -47,6 +47,7 @@ export default function Layout() {
 
   const getUser = () => {
     onAuthStateChanged(auth, (currentUser) => {
+      localStorage.setItem('uid', currentUser.uid)
       setUser(currentUser)
     })
   }
