@@ -6,20 +6,16 @@ import { signInWithRedirect, signOut } from 'firebase/auth'
 export default function Sidebar(prop) {
   const { user } = prop
   const [fold, setFold] = useState(false)
-  const [mode, setMode] = useState(localStorage.getItem('mode'))
+  const [mode, setMode] = useState(JSON.parse(localStorage.getItem('mode')))
   const [login, setLogin] = useState(false)
 
   useEffect(() => {
-    if (mode === null || mode === true) {
-      document.querySelector('body').classList.remove('Dark')
-    } else {
-      document.querySelector('body').classList.add('Dark')
-    }
-
     setMode((prevMode) => {
-      if (prevMode === null) {
+      if (prevMode === null || prevMode === true) {
+        document.querySelector('body').classList.remove('Dark')
         return true
       } else {
+        document.querySelector('body').classList.add('Dark')
         return prevMode
       }
     })
