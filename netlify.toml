@@ -3,3 +3,8 @@
   functions = 'functions/'
   publish = 'dist/'
   external_node_modules = ['firebase-admin']
+
+[[redirects]]
+  from = '/*'
+  to = '/index.html'
+  status = 200
