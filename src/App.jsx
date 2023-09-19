@@ -6,15 +6,13 @@ import Dashboard from './pages/Dashboard'
 import Categories from './pages/Categories'
 import Pomodoro from './pages/Pomodoro'
 import AddTask, { action as addTaskAction } from './pages/AddTask'
-import Login from './pages/Login'
+import Login, { loader as loginLoader } from './pages/Login'
 
 const loader = ({ request }) => {
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || false
   const path = new URL(request.url).pathname
-  console.log(typeof isLoggedIn)
 
   if (!isLoggedIn) {
-    console.log('!isLoggedIn')
     throw redirect(`/login?redirect=${path}`)
   }
 
@@ -30,7 +28,7 @@ export default function App() {
         <Route path='categories' element={<Categories />} loader={loader} />
         <Route path='pomodoro' element={<Pomodoro />} loader={loader} />
         <Route path='addtask' element={<AddTask />} action={addTaskAction} loader={loader} />
-        <Route path='login' element={<Login />} />
+        <Route path='login' element={<Login />} loader={loginLoader} />
       </Route>
     )
   )
