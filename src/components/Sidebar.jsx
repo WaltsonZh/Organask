@@ -28,6 +28,7 @@ export default function Sidebar(prop) {
         localStorage.setItem('isLoggedIn', false)
         setLogin(false)
         await signOut(auth)
+        location.reload()
       } else {
         localStorage.setItem('isLoggedIn', true)
         await signInWithRedirect(auth, provider)
@@ -61,7 +62,14 @@ export default function Sidebar(prop) {
           <i className='bx bx-stopwatch'></i>
           <span>Pomodoro</span>
         </NavLink>
-        <div className='Sidebar--label Sidebar--login' onClick={account}>
+        <div
+          className='Sidebar--label Sidebar--login'
+          onClick={() => {
+            if (!login || user) {
+              account()
+            }
+          }}
+        >
           <i className={`bx ${login ? 'bx-log-out' : 'bxl-google'}`}></i>
           <span>{login ? 'Log out' : 'Login with Google'}</span>
           {login && user === null ? <i className='bx bx-user-circle'></i> : user ? <img src={user.photoURL} /> : null}
