@@ -34,7 +34,6 @@ export default function Layout() {
 
   useEffect(() => {
     const unsubscribe = () => {
-      console.log(localStorage.getItem('uid'))
       const q = query(taskCollection, where('uid', '==', localStorage.getItem('uid')), orderBy('startTimestamp'))
       onSnapshot(q, (snapshot) => {
         const taskArr = snapshot.docs.map((doc) => ({

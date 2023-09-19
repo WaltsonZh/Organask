@@ -27,6 +27,7 @@ export const action = async ({ request }) => {
     endTimestamp,
     fullday: data.fullday ? true : false,
     finish: false,
+    uid: localStorage.getItem('uid'),
   }
   addTask(data)
 
