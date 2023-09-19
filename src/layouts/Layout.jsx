@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import { Outlet, NavLink } from 'react-router-dom'
-import { query, orderBy, onSnapshot } from 'firebase/firestore'
+import { query, orderBy, onSnapshot, where } from 'firebase/firestore'
 import { auth, taskCollection } from '../firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 
@@ -20,20 +20,7 @@ export default function Layout() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const unsubscribe = () => {
-      const q = query(taskCollection, orderBy('startTimestamp'))
-      onSnapshot(q, (snapshot) => {
-        const taskArr = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-        setTasks(taskArr)
-      })
-    }
-
     getUser()
-
-    return unsubscribe
   }, [])
 
   useEffect(() => {
@@ -45,8 +32,26 @@ export default function Layout() {
     )
   }, [tasks])
 
+  useEffect(() => {
+    const unsubscribe = () => {
+      const q = query(taskCollection, where('uid', '==', localStorage.getItem('uid')), orderBy('startTimestamp'))
+      onSnapshot(q, (snapshot) => {
+        const taskArr = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+        setTasks(taskArr)
+      })
+    }
+
+    return unsubscribe
+  }, [user])
+
   const getUser = () => {
     onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        localStorage.setItem('uid', currentUser.uid)
+      }
       setUser(currentUser)
     })
   }

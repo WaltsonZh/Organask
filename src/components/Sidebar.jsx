@@ -26,6 +26,7 @@ export default function Sidebar(prop) {
     try {
       if (user) {
         localStorage.setItem('isLoggedIn', false)
+        localStorage.removeItem('uid')
         setLogin(false)
         await signOut(auth)
         location.reload()
