@@ -57,7 +57,7 @@ export default function Sidebar(prop) {
     <div className={`Sidebar ${fold ? 'fold' : ''}`}>
       <div className='Sidebar--title'>
         <i className='bx bx-task'></i>
-        <span>Task Manager</span>
+        <span>Organask</span>
         <i className='bx bx-chevron-left toggle' onClick={toggleFold}></i>
       </div>
       <div className='Sidebar--menu'>

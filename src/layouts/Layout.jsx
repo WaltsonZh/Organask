@@ -67,7 +67,7 @@ export default function Layout() {
           popup: { modal, setModal },
         }}
       />
-      <NavLink to='addtask' className={({ isActive }) => (isActive ? 'remove' : 'AddTask--btn')}>
+      <NavLink to='addtask' className={({ isActive }) => (isActive || !JSON.parse(localStorage.getItem('isLoggedIn')) ? 'remove' : 'AddTask--btn')}>
         <i className='bx bx-plus'></i>
       </NavLink>
     </>
