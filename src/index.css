@@ -360,6 +360,31 @@ body.Dark .switch::before {
   text-decoration-thickness: 2px;
 }
 
+.Dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4em;
+}
+
+.Dashboard .title {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.Dashboard .title h1:nth-child(2) {
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-thickness: 8px;
+}
+
+.Dashboard .subtitle {
+  padding: 0.5em 1em;
+  background: var(--primary-color-light);
+  border-radius: 10px;
+}
+
 .Calendar {
   grid-template-rows: repeat(auto-fill, minmax(3.6em, 1fr));
 }
@@ -604,7 +629,6 @@ body.Dark .switch::before {
 
 .Categories--task .task span:hover {
   background: var(--primary-color-light);
-  
 }
 
 .Categories--task .task h5 {

@@ -61,6 +61,7 @@ export default function Layout() {
       <Sidebar user={user} />
       <Outlet
         context={{
+          user,
           tasks,
           timer: { timeMap, setTimeMap },
           run: { running, setRunning },
