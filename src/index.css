@@ -462,7 +462,7 @@ body.Dark .switch::before {
 .Calendar .task > p {
   overflow: hidden;
   text-overflow: ellipsis;
-  text-wrap: nowrap;
+  white-space: nowrap;
   font-size: 0.9em;
   background-color: var(--primary-color-light);
   cursor: pointer;
@@ -496,7 +496,7 @@ body.Dark .switch::before {
 }
 
 .Calendar .detail > p {
-  text-wrap: nowrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -546,6 +546,7 @@ body.Dark .switch::before {
   display: grid;
   gap: 0.5em;
   height: fit-content;
+  padding-bottom: 3em;
 }
 
 .Categories--task .folder {
@@ -562,12 +563,12 @@ body.Dark .switch::before {
   grid-template-columns: auto 1fr auto;
   gap: 1em;
   align-items: center;
+  white-space: nowrap;
 }
 
 .Categories--task .folder h4 p {
   overflow: hidden;
   text-overflow: ellipsis;
-  text-wrap: nowrap;
 }
 
 .Categories--task .bx-chevron-up {
@@ -610,7 +611,7 @@ body.Dark .switch::before {
   font-size: 1.2em;
   font-weight: 600;
   max-width: 400px;
-  text-wrap: nowrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }

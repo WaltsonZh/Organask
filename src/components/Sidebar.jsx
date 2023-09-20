@@ -76,7 +76,7 @@ export default function Sidebar(prop) {
         <div
           className='Sidebar--label Sidebar--login'
           onClick={() => {
-            if (!login || user) {
+            if (login && user || !login && user === null) {
               account()
             }
           }}
