@@ -287,7 +287,7 @@ body.Dark .switch::before {
 }
 
 .AddTask input:is(:focus, :valid) ~ span,
-.Pomodoro input:is(:focus, :valid) ~ span,
+.Pomodoro input ~ span,
 .AddTask textarea:is(:focus, :valid) ~ span {
   color: var(--text-color);
   background: var(--body-color);
@@ -664,6 +664,7 @@ body.Dark .switch::before {
 
 .Pomodoro {
   grid-template-rows: repeat(auto-fill, minmax(6em, 1fr));
+  gap: 2em;
   place-items: center;
 }
 
@@ -728,6 +729,17 @@ body.Dark .switch::before {
 
 .PomodoroClock button.current {
   background: var(--body-color);
+}
+
+.PomodoroClock > p {
+  width: 100%;
+  grid-column: span 3;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.5em;
+  border-radius: 10px;
+  border: 3px var(--primary-color) solid;
+  padding: 0.3em;
 }
 
 .Modal {

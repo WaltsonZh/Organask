@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react'
-import { startTimer, stopTimer, timeFormat } from '../utils'
+import { useRef, useEffect, useState } from 'react'
+import { ordinal, startTimer, stopTimer, timeFormat } from '../utils'
 import { useOutletContext } from 'react-router-dom'
 
 /**
@@ -12,6 +12,7 @@ import { useOutletContext } from 'react-router-dom'
 export default function PomodoroClock(prop) {
   const { workTime, shortBreak, longBreak, status, handleStatus } = prop
   const routine = useRef(0)
+  const [cycle, setCycle] = useState(1)
   const {
     run: { running, setRunning },
     timer: { timeMap, setTimeMap },
@@ -22,6 +23,15 @@ export default function PomodoroClock(prop) {
       ...prevTimeMap,
       [status]: localStorage.getItem('timer'),
     }))
+
+    setCycle((prevCycle) => {
+      if (localStorage.getItem('cycle')) {
+        console.log(localStorage.getItem('cycle'))
+        return JSON.parse(localStorage.getItem('cycle'))
+      } else {
+        return prevCycle
+      }
+    })
 
     return () => {
       stopTimer()
@@ -79,6 +89,7 @@ export default function PomodoroClock(prop) {
       return false
     })
     routine.current = 0
+    setCycle(1)
     handleStatus(e.target.name)
     setTimeMap({ pomodoro: workTime, shortBreak, longBreak })
   }
@@ -91,6 +102,7 @@ export default function PomodoroClock(prop) {
       handleStatus('shortBreak')
     } else if (status === 'pomodoro') {
       routine.current = 0
+      setCycle((prevCycle) => prevCycle + 1)
       handleStatus('longBreak')
     } else {
       handleStatus('pomodoro')
@@ -129,6 +141,7 @@ export default function PomodoroClock(prop) {
       <button onClick={statusChange} className={status === 'longBreak' ? 'current' : ''} name='longBreak'>
         Long Break
       </button>
+      <p>{cycle}{ordinal(cycle)} cycle</p>
     </div>
   )
 }
