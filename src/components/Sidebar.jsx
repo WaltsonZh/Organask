@@ -76,20 +76,17 @@ export default function Sidebar(prop) {
         <div
           className='Sidebar--label Sidebar--login'
           onClick={() => {
-            if (!login || user) {
+            if (login && user || !login && user === null) {
               account()
             }
           }}
         >
           <i className={`bx ${login ? 'bx-log-out' : 'bxl-google'}`}></i>
-          <span>{login ? 'Log out' : 'Login with Google'}</span>
+          <span>{login ? 'Log out' : 'Log in'}</span>
           {login && user === null ? <i className='bx bx-user-circle'></i> : user ? <img src={user.photoURL} /> : null}
         </div>
         <div className='Sidebar--mode Sidebar--label' onClick={toggleMode}>
-          <div className='mode--icon'>
-            <i className='bx bx-moon'></i>
-            <i className='bx bx-sun'></i>
-          </div>
+          <div className='mode--icon'>{mode ? <i className='bx bx-moon'></i> : <i className='bx bx-sun'></i>}</div>
           <span>{mode ? 'Dark' : 'Light'} Mode</span>
           <div className='mode--switch'>
             <div className='switch'></div>
