@@ -13,7 +13,7 @@ export const loader = ({ request }) => {
 
 export default function Login() {
   return (
-    <div className='Page Login'>
+    <div className='Login Page'>
       <div>
         <h1>Welcome to Organask</h1>
         <h2>Login to get your tasks Organized.</h2>

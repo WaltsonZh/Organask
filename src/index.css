@@ -59,7 +59,7 @@ body.Dark {
   background: var(--primary-color-light);
   color: var(--text-color);
   height: 100dvh;
-  width: 400px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   padding: 2em 1em;
@@ -76,6 +76,10 @@ body.Dark {
   font-weight: 800;
   letter-spacing: -1px;
   padding: 16px 24px;
+}
+
+.Sidebar--title span {
+  padding-right: 2em;
 }
 
 .toggle {
@@ -138,12 +142,15 @@ body.Dark {
   grid-row: -2;
 }
 
+.Sidebar--login span {
+  flex-grow: 1;
+}
+
 .Sidebar--login img,
 .Sidebar--login .bx-user-circle {
   font-size: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-left: auto;
 }
 
 .Sidebar--mode {
@@ -161,23 +168,6 @@ body.Dark {
   width: 32px;
 }
 
-.Sidebar--mode .mode--icon .bx {
-  position: absolute;
-  top: -16px;
-}
-
-.Sidebar--mode .mode--icon .bx-sun {
-  opacity: 0;
-}
-
-body.Dark .mode--icon .bx-sun {
-  opacity: 1;
-}
-
-body.Dark .mode--icon .bx-moon {
-  opacity: 0;
-}
-
 .Sidebar--mode .mode--switch {
   height: 100%;
   min-width: 55px;
@@ -186,16 +176,12 @@ body.Dark .mode--icon .bx-moon {
   justify-content: center;
 }
 
-.Sidebar.fold .mode--switch {
-  transform: translateX(-177px);
-}
-
 .Sidebar--mode .switch {
   height: 30px;
   width: 60px;
   background: var(--body-color);
   border-radius: 15px;
-  position: absolute;
+  position: relative;
 }
 
 .Sidebar--mode .switch::before {
@@ -788,13 +774,12 @@ body.Dark .switch::before {
 }
 
 .Login {
-  max-width: 950px;
-  padding: 3em;
   align-items: center;
-  margin-left: auto;
 }
 
 .Login div {
+  max-width: 700px;
+  margin-left: auto;
   display: grid;
   gap: 10em;
 }
