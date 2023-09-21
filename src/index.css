@@ -35,8 +35,7 @@ body.Dark {
 
 #root {
   display: flex;
-  height: 100dvh;
-  width: 100dvw;
+  min-height: 100dvh;
 }
 
 .bx {
@@ -58,12 +57,13 @@ body.Dark {
 .Sidebar {
   background: var(--primary-color-light);
   color: var(--text-color);
-  height: 100dvh;
   width: 350px;
   display: flex;
   flex-direction: column;
-  padding: 2em 1em;
+  padding: 2em 1em 0;
   white-space: nowrap;
+  min-height: 100dvh;
+  height: fit-content;
   position: sticky;
   top: 0;
 }
@@ -106,10 +106,10 @@ body.Dark {
 
 .Sidebar--menu {
   margin: 2em 0;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1em;
-  grid-template-rows: repeat(auto-fill, minmax(60px, 1fr));
-  height: 100%;
+  flex-grow: 1;
 }
 
 .Sidebar--label {
@@ -139,7 +139,7 @@ body.Dark {
 }
 
 .Sidebar--login {
-  grid-row: -2;
+  margin-top: auto;
 }
 
 .Sidebar--login span {
@@ -154,7 +154,6 @@ body.Dark {
 }
 
 .Sidebar--mode {
-  grid-row: -1;
   position: relative;
   display: flex;
 }
