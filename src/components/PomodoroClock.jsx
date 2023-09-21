@@ -102,10 +102,12 @@ export default function PomodoroClock(prop) {
       handleStatus('shortBreak')
     } else if (status === 'pomodoro') {
       routine.current = 0
-      setCycle((prevCycle) => prevCycle + 1)
       handleStatus('longBreak')
     } else {
       handleStatus('pomodoro')
+      if (routine.current == 0) {
+        setCycle((prevCycle) => prevCycle + 1)
+      }
     }
   }
 
@@ -141,7 +143,10 @@ export default function PomodoroClock(prop) {
       <button onClick={statusChange} className={status === 'longBreak' ? 'current' : ''} name='longBreak'>
         Long Break
       </button>
-      <p>{cycle}{ordinal(cycle)} cycle</p>
+      <p>
+        {cycle}
+        {ordinal(cycle)} cycle
+      </p>
     </div>
   )
 }
