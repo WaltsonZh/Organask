@@ -106,6 +106,7 @@ export default function PomodoroClock(prop) {
     } else {
       handleStatus('pomodoro')
       if (routine.current == 0) {
+        localStorage.setItem('cycle', cycle + 1)
         setCycle((prevCycle) => prevCycle + 1)
       }
     }
