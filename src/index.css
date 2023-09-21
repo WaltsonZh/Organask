@@ -379,10 +379,52 @@ body.Dark .switch::before {
   text-decoration-thickness: 8px;
 }
 
+.Dashboard section {
+  display: grid;
+  gap: 1em;
+}
+
 .Dashboard .subtitle {
   padding: 0.5em 1em;
   background: var(--primary-color-light);
   border-radius: 10px;
+}
+
+.Dashboard .tasks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1em;
+  padding: 0 2em;
+}
+
+.Dashboard .task {
+  height: 130px;
+  border-radius: 10px;
+  background: var(--primary-color-light);
+  padding: 1em 1.4em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  cursor: pointer;
+}
+
+.Dashboard .task:hover {
+  background: var(--highlight-color);
+}
+
+.Dashboard .task > h3,
+.Dashboard .task > p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.Dashboard .task h3:nth-child(2) {
+  justify-self: end;
+}
+
+.Dashboard .task p {
+  grid-column: 1 / -1;
 }
 
 .Calendar {

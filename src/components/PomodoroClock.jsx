@@ -26,7 +26,6 @@ export default function PomodoroClock(prop) {
 
     setCycle((prevCycle) => {
       if (localStorage.getItem('cycle')) {
-        console.log(localStorage.getItem('cycle'))
         return JSON.parse(localStorage.getItem('cycle'))
       } else {
         return prevCycle
