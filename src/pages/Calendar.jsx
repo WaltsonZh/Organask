@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { monthName, filterTasksByMonth, getDaysOfMonth, getMonthCalendar } from '../utils'
+import { monthName, filterTasksByMonth, getDaysOfMonth, getMonthCalendar, weekName } from '../utils'
 import { useOutletContext } from 'react-router-dom'
 import Modal from '../components/Modal.jsx'
 
@@ -169,6 +169,9 @@ export default function Calendar() {
           <button className='bx bx-chevrons-right' name='nextYear' onClick={navigate}></button>
         </div>
         <button className='bx bx-navigation return' onClick={returnToday}></button>
+      </div>
+      <div className='weekDays'>
+        {weekName.map((day, index) => <p key={index}>{day}</p>)}
       </div>
       <div className='calendar--grid'>{monthlyCalendarEls}</div>
       {modals}
