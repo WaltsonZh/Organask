@@ -1,3 +1,5 @@
+import { monthName, weekName } from '../utils'
+
 export default function Modal(prop) {
   const { closeModal, task } = prop
   const start = task.startTimestamp.toDate()
@@ -12,16 +14,39 @@ export default function Modal(prop) {
         }}
       ></div>
       <div className='content'>
-        <h1>{task.task}</h1>
-        <p>{task.description}</p>
-        <b>start: </b>
-        <span>{task.fullday ? start.toDateString() : `${start.getHours()}:${start.getMinutes()}`}</span>
-        <br />
-        <b>end: </b>
-        <span>{task.fullday ? end.toDateString() : `${end.getHours()}:${end.getMinutes()}`}</span>
-        <br />
-        <b>Fullday: </b>
-        <span>{task.fullday ? 'V' : 'X'}</span>
+        <div className='title'>
+          <h1>{task.task}</h1>
+          <h2>{task.category}</h2>
+        </div>
+        <div className='interval'>
+          <i className='bx bx-time'></i>
+          <p className='time'>
+            <p>
+              {weekName[start.getDay()]} {monthName[start.getMonth()]} {start.getDate()}
+            </p>
+            {!task.fullday ? (
+              <p>
+                {start.getHours()}:{start.getMinutes()}
+              </p>
+            ) : null}
+          </p>
+          <i className='bx bx-right-arrow-alt'></i>
+          <p className='time'>
+            <p>
+              {weekName[end.getDay()]} {monthName[end.getMonth()]} {end.getDate()} {start.getFullYear() !== end.getFullYear() ? end.getFullYear() : ''}
+            </p>
+            {!task.fullday ? (
+              <p>
+                {end.getHours()}:{end.getMinutes()}
+              </p>
+            ) : null}
+          </p>
+        </div>
+        <div className='description'>
+          <h2>Description</h2>
+          <p>{task.description}</p>
+        </div>
+
         <div
           className='close'
           onClick={() => {

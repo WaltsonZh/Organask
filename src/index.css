@@ -791,7 +791,7 @@ body.Dark .switch::before {
 .Modal .content {
   position: absolute;
   display: grid;
-  gap: 0.6em;
+  gap: 2em 0.6em;
   min-width: 400px;
   max-height: 80%;
   top: 50%;
@@ -850,6 +850,36 @@ body.Dark .switch::before {
 
 .Modal .close:hover {
   background: var(--highlight-color);
+}
+
+.Modal .title {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+}
+
+.Modal .title h2 {
+  background: var(--body-color);
+  border-radius: 10px;
+  padding: 0.3em 0.5em;
+  margin-right: 60px;
+  height: fit-content;
+}
+
+.Modal .interval {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  place-items: center;
+  gap: 1em;
+}
+
+.Modal .interval .time {
+  text-align: center;
+}
+
+.Modal .description {
+  display: grid;
+  gap: 1em;
 }
 
 .Login {
