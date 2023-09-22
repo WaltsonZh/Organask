@@ -20,7 +20,7 @@ export default function Modal(prop) {
         </div>
         <div className='interval'>
           <i className='bx bx-time'></i>
-          <p className='time'>
+          <div className='time'>
             <p>
               {weekName[start.getDay()]} {monthName[start.getMonth()]} {start.getDate()}
             </p>
@@ -29,9 +29,9 @@ export default function Modal(prop) {
                 {start.getHours()}:{start.getMinutes()}
               </p>
             ) : null}
-          </p>
+          </div>
           <i className='bx bx-right-arrow-alt'></i>
-          <p className='time'>
+          <div className='time'>
             <p>
               {weekName[end.getDay()]} {monthName[end.getMonth()]} {end.getDate()} {start.getFullYear() !== end.getFullYear() ? end.getFullYear() : ''}
             </p>
@@ -40,7 +40,7 @@ export default function Modal(prop) {
                 {end.getHours()}:{end.getMinutes()}
               </p>
             ) : null}
-          </p>
+          </div>
         </div>
         <div className='description'>
           <h2>Description</h2>
