@@ -493,6 +493,7 @@ body.Dark .switch::before {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  border: transparent 2px solid;
 }
 
 .Calendar .dropdown:hover ~ .tasks {
