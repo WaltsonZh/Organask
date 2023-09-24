@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
+import Footer from '../components/Footer'
 import { Outlet, NavLink } from 'react-router-dom'
 import { query, orderBy, onSnapshot, where } from 'firebase/firestore'
 import { auth, taskCollection } from '../firebase'
@@ -59,15 +60,19 @@ export default function Layout() {
   return (
     <>
       <Sidebar user={user} />
-      <Outlet
-        context={{
-          user,
-          tasks,
-          timer: { timeMap, setTimeMap },
-          run: { running, setRunning },
-          popup: { modal, setModal },
-        }}
-      />
+      <div className='Layout'>
+        <Outlet
+          context={{
+            user,
+            tasks,
+            timer: { timeMap, setTimeMap },
+            run: { running, setRunning },
+            popup: { modal, setModal },
+          }}
+        />
+        <Footer />
+      </div>
+
       <NavLink to='addtask' className={({ isActive }) => (isActive || !JSON.parse(localStorage.getItem('isLoggedIn')) ? 'remove' : 'AddTask--btn')}>
         <i className='bx bx-plus'></i>
       </NavLink>

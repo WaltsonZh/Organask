@@ -31,7 +31,7 @@ export default function Categories() {
     <div className='Categories Page'>
       <h1>Categories</h1>
       <div className='Categories--task'>
-        {categories.map((category, index) => {
+        {tasks.length != 0 ? categories.map((category, index) => {
           return (
             <div key={index} className='folder hide' onClick={toggleFolder}>
               <h4>
@@ -78,7 +78,7 @@ export default function Categories() {
               </div>
             </div>
           )
-        })}
+        }) : <h2>No tasks found.</h2>}
       </div>
     </div>
   )

@@ -54,6 +54,28 @@ body.Dark {
   scrollbar-gutter: stable;
 }
 
+.Layout {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.Footer {
+  height: 3em;
+  display: flex;
+  gap: 10em;
+  place-self: center;
+}
+
+.Footer .links {
+  display: flex;
+  gap: 1.2em;
+}
+
+.Footer .links i {
+  font-size: 1.6em;
+}
+
 .Sidebar {
   background: var(--primary-color-light);
   color: var(--text-color);
