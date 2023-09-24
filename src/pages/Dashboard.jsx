@@ -1,6 +1,8 @@
 import { useOutletContext } from 'react-router-dom'
 import Modal from '../components/Modal'
 import { useEffect, useState } from 'react'
+import { removeTask, auth } from '../firebase'
+import { deleteUser, signOut } from 'firebase/auth'
 
 export default function Dashboard() {
   const {
@@ -45,6 +47,22 @@ export default function Dashboard() {
       ...prevModal,
       [id]: false,
     }))
+  }
+
+  const deleteAccount = async () => {
+    tasks.forEach((task) => {
+      removeTask(task.id)
+    })
+
+    try {
+      localStorage.setItem('isLoggedIn', false)
+      localStorage.removeItem('uid')
+      await deleteUser(user)
+      await signOut(auth)
+      location.reload()
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -124,7 +142,7 @@ export default function Dashboard() {
                 <h1>Delete your account ?</h1>
                 <p>All your tasks will be deleted.</p>
                 <div className='confirm'>
-                  <div>Delete</div>
+                  <div onClick={deleteAccount}>Delete</div>
                   <div
                     onClick={(e) => {
                       e.stopPropagation()
