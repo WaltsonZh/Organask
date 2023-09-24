@@ -448,6 +448,16 @@ body.Dark .switch::before {
   grid-column: 1 / -1;
 }
 
+.Dashboard .deleteAccount {
+  background: var(--primary-color-light);
+  width: fit-content;
+  padding: 1em;
+  border-radius: 10px;
+  cursor: pointer;
+  place-self: end;
+  font-weight: 500;
+}
+
 .Calendar {
   grid-template-rows: auto auto auto 1fr;
   padding-bottom: 6.6em;
@@ -923,6 +933,28 @@ body.Dark .switch::before {
 .Modal .description {
   display: grid;
   gap: 1em;
+}
+
+.Modal .confirm {
+  display: flex;
+  justify-content: end;
+  gap: 1em;
+}
+
+.Modal .confirm * {
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.Modal .confirm div:nth-child(1):hover {
+  background: red;
+  color: white;
+}
+
+.Modal .confirm div:nth-child(2):hover {
+  background: var(--highlight-color);
 }
 
 .Login {

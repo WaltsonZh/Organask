@@ -7,7 +7,7 @@ export default function Footer() {
         <a href='https://github.com/WaltsonZh' target='_blank'>
           <i className='bx bxl-github'></i>
         </a>
-        <a href='https://github.com/WaltsonZh' target='_blank'>
+        <a href='https://www.linkedin.com/in/waltsonzh' target='_blank'>
           <i className='bx bxl-linkedin'></i>
         </a>
         <a href='mailto:waltson2003@gmail.com' target='_blank'>

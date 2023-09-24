@@ -13,6 +13,7 @@ export default function Dashboard() {
   const nextWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7)
   const [todayTasks, setTodayTasks] = useState([])
   const [recentTasks, setRecentTasks] = useState([])
+  const [deleteAccountModal, setDeleteAccountModal] = useState(false)
 
   useEffect(() => {
     setTodayTasks(getTodayTasks())
@@ -107,6 +108,37 @@ export default function Dashboard() {
           )}
         </div>
       </section>
+      {user ? (
+        <div className='deleteAccount' onClick={() => setDeleteAccountModal(true)}>
+          Delete account
+          {deleteAccountModal ? (
+            <div className='Modal'>
+              <div
+                className='overlay'
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setDeleteAccountModal(false)
+                }}
+              ></div>
+              <div className='content'>
+                <h1>Delete your account ?</h1>
+                <p>All your tasks will be deleted.</p>
+                <div className='confirm'>
+                  <div>Delete</div>
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setDeleteAccountModal(false)
+                    }}
+                  >
+                    Cancel
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   )
 }
