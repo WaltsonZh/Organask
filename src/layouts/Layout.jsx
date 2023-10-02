@@ -72,7 +72,6 @@ export default function Layout() {
         />
         <Footer />
       </div>
-
       <NavLink to='addtask' className={({ isActive }) => (isActive || !JSON.parse(localStorage.getItem('isLoggedIn')) ? 'remove' : 'AddTask--btn')}>
         <i className='bx bx-plus'></i>
       </NavLink>

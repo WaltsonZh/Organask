@@ -3,6 +3,7 @@ import { Form } from 'react-router-dom'
 import { Timestamp } from 'firebase/firestore'
 import { addTask } from '../firebase'
 import { dateFormat } from '../utils.js'
+import { toast } from 'react-toastify'
 
 export const action = async ({ request }) => {
   const formData = await request.formData()
@@ -29,7 +30,12 @@ export const action = async ({ request }) => {
     finish: false,
     uid: localStorage.getItem('uid'),
   }
-  addTask(data)
+
+  toast.promise(addTask(data), {
+    pending: 'Adding Task...',
+    success: 'Task Added!',
+    error: 'Failed to add task.',
+  })
 
   return null
 }
